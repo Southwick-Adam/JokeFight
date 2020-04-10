@@ -1,0 +1,98 @@
+[gd_scene load_steps=9 format=2]
+
+[ext_resource path="res://scenes/terrain.tscn" type="PackedScene" id=1]
+[ext_resource path="res://scripts/main.gd" type="Script" id=2]
+[ext_resource path="res://scenes/ray.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/sean.tscn" type="PackedScene" id=4]
+[ext_resource path="res://scenes/adam.tscn" type="PackedScene" id=5]
+[ext_resource path="res://scenes/andy.tscn" type="PackedScene" id=6]
+[ext_resource path="res://scenes/spawner.tscn" type="PackedScene" id=7]
+
+[sub_resource type="Animation" id=1]
+resource_name = "shake"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/path = NodePath("Camera2D:current")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.2 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 1,
+"values": [ true, false ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Camera2D:offset_h")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.1, 0.02, -0.1, 0.1 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Camera2D:offset_v")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.05, 0.1, 0.15, 0.2 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.05, -0.13, 0.2, -0.3 ]
+}
+
+[node name="main" type="Node2D"]
+script = ExtResource( 2 )
+Sean = ExtResource( 4 )
+Adam = ExtResource( 5 )
+Ray = ExtResource( 3 )
+Andy = ExtResource( 6 )
+
+[node name="terrain" parent="." instance=ExtResource( 1 )]
+position = Vector2( -3.01468, 33.1614 )
+
+[node name="1" type="Position2D" parent="."]
+
+[node name="2" type="Position2D" parent="."]
+position = Vector2( 860, 0 )
+
+[node name="3" type="Position2D" parent="."]
+position = Vector2( 0, 525 )
+
+[node name="4" type="Position2D" parent="."]
+position = Vector2( 860, 525 )
+
+[node name="spawn1" type="Position2D" parent="."]
+position = Vector2( 253.426, 217.805 )
+
+[node name="spawn2" type="Position2D" parent="."]
+position = Vector2( 618.006, 58.6412 )
+
+[node name="spawn3" type="Position2D" parent="."]
+position = Vector2( 955.379, 191.958 )
+
+[node name="spawn4" type="Position2D" parent="."]
+position = Vector2( 619.366, 431.384 )
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/shake = SubResource( 1 )
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 590.021, 344.665 )
+offset_h = 0.1
+offset_v = -0.3
+
+[node name="spawner" parent="." instance=ExtResource( 7 )]
+position = Vector2( 620.782, -60.0389 )
+Sean = null
+Adam = null
+Ray = null
+Andy = null

@@ -1,0 +1,264 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/pixel.png" type="Texture" id=1]
+[ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=2]
+[ext_resource path="res://scripts/server_screen.gd" type="Script" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 50
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+use_mipmaps = true
+use_filter = true
+extra_spacing_char = 1
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=3]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 24
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="server_screen" type="Node2D"]
+script = ExtResource( 3 )
+
+[node name="Label" type="Label" parent="."]
+margin_left = 457.449
+margin_top = 49.4539
+margin_right = 721.449
+margin_bottom = 110.454
+custom_fonts/font = SubResource( 1 )
+text = "GAME TITLE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="name" type="Position2D" parent="."]
+position = Vector2( 125.842, 213.549 )
+
+[node name="back" type="Sprite" parent="name"]
+self_modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+position = Vector2( 203.562, 10.6162 )
+scale = Vector2( 492.612, 94.8702 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="name"]
+margin_top = -7.40247
+margin_right = 93.0
+margin_bottom = 29.5975
+custom_fonts/font = SubResource( 2 )
+text = "NAME: "
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="LineEdit" type="LineEdit" parent="name"]
+margin_left = 114.896
+margin_top = -11.1494
+margin_right = 320.896
+margin_bottom = 31.8506
+custom_fonts/font = SubResource( 3 )
+text = "Player"
+max_length = 10
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="host" type="Position2D" parent="."]
+position = Vector2( 127.693, 374.552 )
+
+[node name="back" type="Sprite" parent="host"]
+self_modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+position = Vector2( 203.562, 10.6162 )
+scale = Vector2( 492.612, 94.8702 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="host"]
+margin_top = -7.40247
+margin_right = 93.0
+margin_bottom = 29.5975
+custom_fonts/font = SubResource( 2 )
+text = "CREATE SERVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnCreate" type="Button" parent="host"]
+margin_left = 299.0
+margin_top = -16.0
+margin_right = 412.0
+margin_bottom = 36.0
+text = "CREATE"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join" type="Position2D" parent="."]
+position = Vector2( 127.693, 533.22 )
+
+[node name="back" type="Sprite" parent="join"]
+self_modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+position = Vector2( 203.562, 10.6162 )
+scale = Vector2( 492.612, 94.8702 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="join"]
+margin_top = -7.40247
+margin_right = 93.0
+margin_bottom = 29.5975
+custom_fonts/font = SubResource( 2 )
+text = "JOIN SERVER"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnJoin" type="Button" parent="join"]
+margin_left = 299.0
+margin_top = -16.0
+margin_right = 412.0
+margin_bottom = 36.0
+text = "JOIN"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="settings" type="Position2D" parent="."]
+visible = false
+position = Vector2( 680.958, 261.223 )
+
+[node name="back" type="Sprite" parent="settings"]
+self_modulate = Color( 0.176471, 0.176471, 0.176471, 1 )
+position = Vector2( 203.562, 112.615 )
+scale = Vector2( 492.612, 298.868 )
+texture = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="settings"]
+margin_left = 9.02515
+margin_top = 18.8287
+margin_right = 102.025
+margin_bottom = 55.8287
+custom_fonts/font = SubResource( 2 )
+text = "PORT"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label2" type="Label" parent="settings"]
+margin_left = 2.67841
+margin_top = 80.709
+margin_right = 95.6784
+margin_bottom = 117.709
+custom_fonts/font = SubResource( 2 )
+text = "IP"
+align = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Label3" type="Label" parent="settings"]
+margin_left = -24.295
+margin_top = 136.243
+margin_right = 185.705
+margin_bottom = 213.243
+custom_fonts/font = SubResource( 4 )
+text = "MAX
+CONNECTIONS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnApply" type="Button" parent="settings"]
+margin_left = 320.006
+margin_top = 193.719
+margin_right = 433.006
+margin_bottom = 245.719
+text = "Apply"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="port" type="LineEdit" parent="settings"]
+margin_left = 125.0
+margin_top = 20.24
+margin_right = 266.0
+margin_bottom = 54.24
+text = "8088"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="IP" type="LineEdit" parent="settings"]
+margin_left = 126.587
+margin_top = 82.1202
+margin_right = 267.587
+margin_bottom = 116.12
+text = "127.0.0.1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="maxConnects" type="SpinBox" parent="settings"]
+margin_left = 182.467
+margin_top = 153.907
+margin_right = 256.467
+margin_bottom = 177.907
+value = 8.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="btnSettings" type="Button" parent="."]
+margin_left = 806.517
+margin_top = 336.769
+margin_right = 1010.52
+margin_bottom = 413.769
+text = "ADVANCED SETTINGS"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="create_error" type="Label" parent="."]
+visible = false
+modulate = Color( 0.960784, 0.298039, 0.298039, 1 )
+margin_left = 652.746
+margin_top = 552.323
+margin_right = 781.746
+margin_bottom = 566.323
+text = "ERROR: PORT IN USE OR MAX CONNECTIONS ARE OUTSIDE PARAMETERS 
+(0 < n < 99)"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="join_error" type="Label" parent="."]
+visible = false
+modulate = Color( 0.960784, 0.298039, 0.298039, 1 )
+margin_left = 652.746
+margin_top = 552.323
+margin_right = 781.746
+margin_bottom = 566.323
+text = "ERROR: PORT INACTIVE OR IP ADRESS INVALID"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="JoinTimer" type="Timer" parent="."]
+one_shot = true
+[connection signal="pressed" from="host/btnCreate" to="." method="_on_btnCreate_pressed"]
+[connection signal="pressed" from="join/btnJoin" to="." method="_on_btnJoin_pressed"]
+[connection signal="pressed" from="settings/btnApply" to="." method="_on_btnApply_pressed"]
+[connection signal="pressed" from="btnSettings" to="." method="_on_btnSettings_pressed"]
+[connection signal="timeout" from="JoinTimer" to="." method="_on_JoinTimer_timeout"]

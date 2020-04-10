@@ -1,0 +1,368 @@
+[gd_scene load_steps=29 format=2]
+
+[ext_resource path="res://animations/stab.tres" type="Animation" id=1]
+[ext_resource path="res://animations/attack.tres" type="Animation" id=2]
+[ext_resource path="res://animations/jump.tres" type="Animation" id=3]
+[ext_resource path="res://animations/idle.tres" type="Animation" id=4]
+[ext_resource path="res://animations/run.tres" type="Animation" id=5]
+[ext_resource path="res://animations/fall.tres" type="Animation" id=6]
+[ext_resource path="res://scripts/body.gd" type="Script" id=7]
+[ext_resource path="res://assets/pixel.png" type="Texture" id=8]
+[ext_resource path="res://assets/players/hand.png" type="Texture" id=9]
+[ext_resource path="res://assets/players/sean/body.png" type="Texture" id=10]
+[ext_resource path="res://assets/players/sean/head.png" type="Texture" id=11]
+[ext_resource path="res://assets/leg.png" type="Texture" id=12]
+[ext_resource path="res://assets/players/sean/camera.png" type="Texture" id=13]
+[ext_resource path="res://scripts/sean.gd" type="Script" id=14]
+[ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=15]
+[ext_resource path="res://animations/gun_sean.tres" type="Animation" id=16]
+[ext_resource path="res://assets/players/sean/boom2.png" type="Texture" id=17]
+[ext_resource path="res://assets/players/sean/dot.png" type="Texture" id=18]
+[ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=19]
+[ext_resource path="res://scenes/sean_ult.tscn" type="PackedScene" id=20]
+[ext_resource path="res://scenes/sean_ult_marks.tscn" type="PackedScene" id=21]
+[ext_resource path="res://assets/players/sean/eyes.png" type="Texture" id=22]
+[ext_resource path="res://assets/players/sean/glow.png" type="Texture" id=23]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 25, 6 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 865.497, 10 )
+
+[sub_resource type="CapsuleShape2D" id=3]
+radius = 24.0864
+height = 38.4879
+
+[sub_resource type="DynamicFont" id=4]
+size = 18
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 19 )
+
+[sub_resource type="Animation" id=5]
+resource_name = "ult"
+length = 6.0
+tracks/0/type = "value"
+tracks/0/path = NodePath("KinematicBody2D/Sprite:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 5.5, 5.7, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, -10 ), Vector2( 0, 0 ), Vector2( 0, 0 ) ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("KinematicBody2D/Sprite:rotation_degrees")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.3, 0.6, 5.5, 5.7, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("KinematicBody2D/Sprite/body:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0, 0.3, 5.7, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0.464579, 4.8883 ), Vector2( 0.464579, 4.8883 ), Vector2( 0.464579, 4.8883 ), Vector2( 0.464579, 4.8883 ) ]
+}
+tracks/3/type = "value"
+tracks/3/path = NodePath("KinematicBody2D/Sprite/body:rotation_degrees")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/keys = {
+"times": PoolRealArray( 0, 0.3, 5.7, 6 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/4/type = "value"
+tracks/4/path = NodePath("KinematicBody2D/Sprite/head:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -0.412223, -24.6726 ), Vector2( -2.40108, -24.6726 ), Vector2( -2.40108, -24.6726 ), Vector2( -0.412223, -24.6726 ) ]
+}
+tracks/5/type = "value"
+tracks/5/path = NodePath("KinematicBody2D/Sprite/head:rotation_degrees")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, -7.36547, -7.36547, 0.0 ]
+}
+tracks/6/type = "value"
+tracks/6/path = NodePath("KinematicBody2D/Sprite/handL:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -18.7074, 9.20673 ), Vector2( -25.2326, 12.4693 ), Vector2( -25.2326, 12.4693 ), Vector2( -18.7074, 9.20673 ) ]
+}
+tracks/7/type = "value"
+tracks/7/path = NodePath("KinematicBody2D/Sprite/handL:rotation_degrees")
+tracks/7/interp = 1
+tracks/7/loop_wrap = true
+tracks/7/imported = false
+tracks/7/enabled = true
+tracks/7/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/8/type = "value"
+tracks/8/path = NodePath("KinematicBody2D/Sprite/handR:position")
+tracks/8/interp = 1
+tracks/8/loop_wrap = true
+tracks/8/imported = false
+tracks/8/enabled = true
+tracks/8/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 21.3266, 9.69692 ), Vector2( 27.0361, 12.9595 ), Vector2( 27.0361, 12.9595 ), Vector2( 21.3266, 9.69692 ) ]
+}
+tracks/9/type = "value"
+tracks/9/path = NodePath("KinematicBody2D/Sprite/handR:rotation_degrees")
+tracks/9/interp = 1
+tracks/9/loop_wrap = true
+tracks/9/imported = false
+tracks/9/enabled = true
+tracks/9/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 0.0, 0.0, 0.0, 0.0 ]
+}
+tracks/10/type = "value"
+tracks/10/path = NodePath("KinematicBody2D/Sprite/legL:position")
+tracks/10/interp = 1
+tracks/10/loop_wrap = true
+tracks/10/imported = false
+tracks/10/enabled = true
+tracks/10/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( -8.19322, 23.9495 ), Vector2( -7.39768, 23.9495 ), Vector2( -7.39768, 23.9495 ), Vector2( -8.19322, 23.9495 ) ]
+}
+tracks/11/type = "value"
+tracks/11/path = NodePath("KinematicBody2D/Sprite/legL:rotation_degrees")
+tracks/11/interp = 1
+tracks/11/loop_wrap = true
+tracks/11/imported = false
+tracks/11/enabled = true
+tracks/11/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ 4.15006, 0.0, 0.0, 4.15006 ]
+}
+tracks/12/type = "value"
+tracks/12/path = NodePath("KinematicBody2D/Sprite/legR:position")
+tracks/12/interp = 1
+tracks/12/loop_wrap = true
+tracks/12/imported = false
+tracks/12/enabled = true
+tracks/12/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ Vector2( 7.0291, 24.3478 ), Vector2( 5.04025, 23.95 ), Vector2( 5.04025, 23.95 ), Vector2( 7.0291, 24.3478 ) ]
+}
+tracks/13/type = "value"
+tracks/13/path = NodePath("KinematicBody2D/Sprite/legR:rotation_degrees")
+tracks/13/interp = 1
+tracks/13/loop_wrap = true
+tracks/13/imported = false
+tracks/13/enabled = true
+tracks/13/keys = {
+"times": PoolRealArray( 0, 0.3, 6.6, 6.9 ),
+"transitions": PoolRealArray( 1, 1, 1, 1 ),
+"update": 0,
+"values": [ -6.51589, 0.0, 0.0, -6.51589 ]
+}
+
+[node name="sean" type="Node2D"]
+script = ExtResource( 14 )
+Ult = ExtResource( 20 )
+Marks = ExtResource( 21 )
+
+[node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[
+"player",
+]]
+scale = Vector2( 0.9, 0.9 )
+script = ExtResource( 7 )
+Bars = ExtResource( 15 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D"]
+
+[node name="body" type="Sprite" parent="KinematicBody2D/Sprite"]
+position = Vector2( 0.464579, 4.8883 )
+texture = ExtResource( 10 )
+
+[node name="head" type="Sprite" parent="KinematicBody2D/Sprite"]
+position = Vector2( -0.412223, -24.6726 )
+z_index = 1
+texture = ExtResource( 11 )
+
+[node name="eyes" type="Sprite" parent="KinematicBody2D/Sprite/head"]
+visible = false
+texture = ExtResource( 22 )
+
+[node name="handL" type="Sprite" parent="KinematicBody2D/Sprite"]
+self_modulate = Color( 0.784314, 0.682353, 0.482353, 1 )
+position = Vector2( -18.7074, 9.20673 )
+scale = Vector2( 0.5, 0.5 )
+z_index = 2
+texture = ExtResource( 9 )
+
+[node name="handR" type="Sprite" parent="KinematicBody2D/Sprite"]
+self_modulate = Color( 0.784314, 0.682353, 0.482353, 1 )
+position = Vector2( 21.3266, 9.69692 )
+scale = Vector2( 0.5, 0.5 )
+z_index = -3
+texture = ExtResource( 9 )
+
+[node name="weapon" type="Area2D" parent="KinematicBody2D/Sprite/handR"]
+show_behind_parent = true
+position = Vector2( -42.6532, -19.3938 )
+scale = Vector2( 2.22222, 2.22222 )
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/handR/weapon"]
+position = Vector2( 32.4019, -13.8283 )
+rotation = 0.436877
+texture = ExtResource( 17 )
+offset = Vector2( 6.90869, -6.25837 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/handR/weapon"]
+position = Vector2( 33.9318, -14.76 )
+rotation = -1.13229
+shape = SubResource( 1 )
+
+[node name="legL" type="Sprite" parent="KinematicBody2D/Sprite"]
+self_modulate = Color( 0.486275, 0.360784, 0.188235, 1 )
+position = Vector2( -8.19322, 23.9495 )
+rotation = 0.0724322
+z_index = -1
+texture = ExtResource( 12 )
+
+[node name="legR" type="Sprite" parent="KinematicBody2D/Sprite"]
+self_modulate = Color( 0.486275, 0.360784, 0.188235, 1 )
+position = Vector2( 7.0291, 24.3478 )
+rotation = -0.113724
+z_index = -2
+texture = ExtResource( 12 )
+
+[node name="gun" type="Sprite" parent="KinematicBody2D/Sprite"]
+visible = false
+position = Vector2( 36.4987, 13.49 )
+scale = Vector2( 0.75, 0.75 )
+z_index = 1
+texture = ExtResource( 13 )
+
+[node name="beam" type="Area2D" parent="KinematicBody2D/Sprite/gun"]
+show_behind_parent = true
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/gun/beam"]
+self_modulate = Color( 0.45098, 0.937255, 0.858824, 0.411765 )
+show_behind_parent = true
+position = Vector2( 20.6801, -5.21086 )
+scale = Vector2( 1714.36, 17.617 )
+texture = ExtResource( 8 )
+offset = Vector2( 0.505479, 0.0292177 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/gun/beam"]
+position = Vector2( 878.29, -5.18855 )
+shape = SubResource( 2 )
+
+[node name="dot" type="Sprite" parent="KinematicBody2D/Sprite/gun"]
+visible = false
+z_index = 1
+texture = ExtResource( 18 )
+
+[node name="glow" type="Sprite" parent="KinematicBody2D/Sprite/gun"]
+self_modulate = Color( 1, 0, 0, 1 )
+position = Vector2( -15.0251, -0.302291 )
+z_index = 1
+texture = ExtResource( 23 )
+offset = Vector2( 15.0251, 0.302291 )
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
+visible = false
+position = Vector2( 1.2605, -6.96839 )
+shape = SubResource( 3 )
+
+[node name="Label" type="Label" parent="KinematicBody2D"]
+margin_left = -8.15644
+margin_top = -69.3299
+margin_right = 31.8436
+margin_bottom = -46.3299
+custom_fonts/font = SubResource( 4 )
+text = "P1"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/fall = ExtResource( 6 )
+anims/idle = ExtResource( 4 )
+anims/jump = ExtResource( 3 )
+anims/run = ExtResource( 5 )
+
+[node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
+anims/attack = ExtResource( 2 )
+anims/gun = ExtResource( 16 )
+anims/stab = ExtResource( 1 )
+anims/ult = SubResource( 5 )
+
+[node name="ReloadTimer" type="Timer" parent="."]
+wait_time = 3.0
+
+[node name="BoomTimer" type="Timer" parent="."]
+wait_time = 10.0
+one_shot = true
+
+[node name="UltTimer" type="Timer" parent="."]
+
+[node name="DeathTimer" type="Timer" parent="."]
+wait_time = 0.5
+one_shot = true
+[connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
+[connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam" to="." method="_on_beam_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Sprite/gun/beam" to="." method="_on_beam_body_exited"]
+[connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
+[connection signal="timeout" from="BoomTimer" to="." method="_on_BoomTimer_timeout"]
+[connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
