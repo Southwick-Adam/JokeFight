@@ -5,13 +5,15 @@ var player
 var max_value = 100.0
 var current_value = 100.0
 var percent = 1.0
+var bar_num = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$Label.text = Gamestate.player_info.name
+	player.connect("backstep", self, "_backstep")
+	player.connect("dead", self, "_dead")
+	var target = Network.players.keys()[bar_num]
+	$Label.text = Network.players[target].name
 
-
-# Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 #HEALTH BAR
 	current_value = clamp(player.health, 0, max_value)
@@ -61,5 +63,13 @@ func _backstep():
 	back_lit -= 1
 
 func _set_player(person):
+	print(person.get_parent().name)
 	player = person
+
+func _set_num(num):
+	bar_num = num
+
+func _dead():
+	queue_free()
+	
 	

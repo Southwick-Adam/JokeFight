@@ -53,29 +53,17 @@ func _on_player_disconnected(id):
 		rpc("unregister_player", id)
 
 remote func register_player(pinfo):
-	if (get_tree().is_network_server()):
-		# We are on the server, so distribute the player list information throughout the connected players
-		for id in players:
-			# Send currently iterated player info to the new player
-			rpc_id(pinfo.net_id, "register_player", players[id])
-			# Send new player info to currently iterated player, skipping the server
-			if (id != 1):
-				rpc_id(id, "register_player", pinfo)
-	
-	# Now to code that will be executed regardless of being on client or server
 	players[pinfo.net_id] = pinfo
-	emit_signal("player_list_changed")
-	print(players)
 #SYNC PLAYER LISTS
 	if (get_tree().is_network_server()):
 		for id in players:
 			if (id != 1):
 				rpc_id(id, "sync_dict", players)
+	emit_signal("player_list_changed")
 
 remote func sync_dict(dict):
 	players = dict
-	print(players)
-	
+	emit_signal("player_list_changed")
 
 func update_server():
 	if (get_tree().is_network_server()):

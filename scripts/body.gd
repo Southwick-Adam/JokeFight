@@ -17,11 +17,24 @@ var req = false
 var bars
 var backsteps = 2
 
+signal backstep
+signal dead
+
 func _ready():
+	var number = 0
+	var n = 0
+	while n < Network.players.size():
+		var targ = Network.players.keys()[n]
+		number = n
+		if Network.players[targ].character == get_parent().name:
+			break
+		n += 1
 	var node = Bars.instance()
-	node._set_player(self)
 	get_node("/root/main").call_deferred("add_child", node)
-	node.global_position = get_node("/root/main").get_node("bar1").position
+	print(number)
+	node.position = get_node("/root/main").get_child(number + 1).position
+	node._set_player(self)
+	node._set_num(number)
 
 func _process(_delta):
 #GRAVITY
@@ -134,7 +147,7 @@ func _backstep():
 	else:
 		velocity.y = 0
 		velocity.x = -900 * $Sprite.scale.x
-	bars._backstep()
+	emit_signal("backstep")
 	backsteps -= 1
 
 func _die():
@@ -155,5 +168,5 @@ func _die():
 func _on_DeathTimer_timeout():
 	#REDUCE LIFE BY ONE
 	get_node("/root/main/spawner")._respawn(get_parent().name)
-	get_parent().get_node("bars").queue_free()
+	emit_signal("dead")
 	queue_free()

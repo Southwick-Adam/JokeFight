@@ -14,7 +14,7 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	velocity.x = 0
 	if body.is_in_group("player"):
-		body._damge(5)
+		body._damage(5)
 		if sp:
 			var node = Burn.instance()
 			body.add_child(node)

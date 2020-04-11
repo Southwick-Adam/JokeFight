@@ -15,13 +15,13 @@ func _ready():
 
 func _spawn(choice):
 	var node
-	if choice == ("Sean"):
+	if choice == ("sean"):
 		node = Sean.instance()
-	elif choice == ("Adam"):
+	elif choice == ("adam"):
 		node = Adam.instance()
-	elif choice == ("Ray"):
+	elif choice == ("ray"):
 		node = Ray.instance()
-	elif choice == ("Andy"):
+	elif choice == ("andy"):
 		node = Andy.instance()
 	get_node("/root/main").call_deferred("add_child", node)
 	node.position = get_child(spawn_pos).position

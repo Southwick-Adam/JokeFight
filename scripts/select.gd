@@ -28,7 +28,8 @@ func _input(event):
 			if choice < 3:
 				choice += 1
 	if event.is_action_pressed("x"):
-		_unchoose()
+		if Gamestate.player_info.character != null:
+			_unchoose()
 
 func _on_player_list_changed():
 # First remove all children from the list of names
@@ -46,25 +47,24 @@ func _on_player_list_changed():
 remote func _start_game():
 	var game = Game.instance()
 	get_tree().get_root().add_child(game)
-	# Spawn all the people
+# Spawn all the people
 	for id in Network.players:
 		get_node("/root/main")._spawn(Network.players[id].character)
 	queue_free()
 
 func _choose(choice):
-	if get_child(choice).get_node("lock").visible == false:
-		_lock(choice)
-		rpc("_lock", choice)
-		if choice == 0:
-			choice_name = ("Sean")
-		elif choice == 1:
-			choice_name = ("Adam")
-		elif choice == 2:
-			choice_name = ("Ray")
-		elif choice == 3:
-			choice_name = ("Andy")
-		Gamestate.player_info.character = choice_name
-		Network.update_server()
+	_lock(choice)
+	rpc("_lock", choice)
+	if choice == 0:
+		choice_name = ("sean")
+	elif choice == 1:
+		choice_name = ("adam")
+	elif choice == 2:
+		choice_name = ("ray")
+	elif choice == 3:
+		choice_name = ("andy")
+	Gamestate.player_info.character = choice_name
+	Network.update_server()
 
 func _unchoose():
 	get_child(choice).get_node("lock").hide()

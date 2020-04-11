@@ -10,7 +10,7 @@ func _input(event):
 	choice = get_parent().choice
 	global_position = get_parent().get_child(choice).global_position
 #CHOOSE
-	#if is_network_master():
-	if event.is_action_pressed("z"):
+	if get_parent().get_child(choice).get_node("lock").visible == false:
+		if event.is_action_pressed("z"):
 			get_parent()._choose(choice)
 			queue_free()
