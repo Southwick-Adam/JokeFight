@@ -11,7 +11,7 @@
 [ext_resource path="res://assets/glow.png" type="Texture" id=9]
 
 [sub_resource type="DynamicFont" id=1]
-size = 33
+size = 27
 use_mipmaps = true
 use_filter = true
 extra_spacing_char = 4
@@ -23,10 +23,10 @@ z_index = 10
 script = ExtResource( 4 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 11.6768
-margin_top = 1.4801
-margin_right = 51.6768
-margin_bottom = 49.4801
+margin_left = 12.4856
+margin_top = 7.95075
+margin_right = 195.486
+margin_bottom = 55.9508
 custom_fonts/font = SubResource( 1 )
 text = "Player Name"
 __meta__ = {
@@ -35,7 +35,7 @@ __meta__ = {
 
 [node name="health" type="Sprite" parent="."]
 self_modulate = Color( 0.431373, 0.0196078, 0.0196078, 1 )
-position = Vector2( 76.6173, 51.4118 )
+position = Vector2( 76.6173, 61.1178 )
 scale = Vector2( 8, 6 )
 texture = ExtResource( 1 )
 
@@ -53,7 +53,7 @@ offset = Vector2( 7.11877, 0.120914 )
 
 [node name="sp" type="Sprite" parent="."]
 self_modulate = Color( 0.0313726, 0.0509804, 0.447059, 1 )
-position = Vector2( 76.6173, 79.0153 )
+position = Vector2( 76.6173, 88.7213 )
 scale = Vector2( 8, 6 )
 texture = ExtResource( 5 )
 
@@ -97,7 +97,7 @@ texture = ExtResource( 8 )
 
 [node name="back1" type="Sprite" parent="."]
 self_modulate = Color( 0, 0.513726, 0.0823529, 1 )
-position = Vector2( 161.469, 49.8272 )
+position = Vector2( 161.469, 59.5332 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 7 )
 
@@ -115,7 +115,7 @@ texture = ExtResource( 8 )
 
 [node name="back2" type="Sprite" parent="."]
 self_modulate = Color( 0, 0.513726, 0.0823529, 1 )
-position = Vector2( 161.469, 77.1932 )
+position = Vector2( 161.469, 86.8992 )
 scale = Vector2( 1.2, 1.2 )
 texture = ExtResource( 7 )
 

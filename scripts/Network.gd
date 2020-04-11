@@ -42,7 +42,6 @@ func _on_player_connected(id):
 	# And register itself on the local list
 	register_player(Gamestate.player_info)
 
-
 # Everyone gets notified whenever someone disconnects from the server
 func _on_player_disconnected(id):
 	print("Player ", players[id].name, " disconnected from server")
@@ -59,19 +58,36 @@ remote func register_player(pinfo):
 		for id in players:
 			# Send currently iterated player info to the new player
 			rpc_id(pinfo.net_id, "register_player", players[id])
-			# Send new player info to currently iterated player, skipping the server (which will get the info shortly)
+			# Send new player info to currently iterated player, skipping the server
 			if (id != 1):
 				rpc_id(id, "register_player", pinfo)
 	
 	# Now to code that will be executed regardless of being on client or server
-	print("Registering player ", pinfo.name, " (", pinfo.net_id, ") to internal player table")
-	players[pinfo.net_id] = pinfo          # Create the player entry in the dictionary
-	emit_signal("player_list_changed")     # And notify that the player list has been changed
+	players[pinfo.net_id] = pinfo
+	emit_signal("player_list_changed")
+	print(players)
+#SYNC PLAYER LISTS
+	if (get_tree().is_network_server()):
+		for id in players:
+			if (id != 1):
+				rpc_id(id, "sync_dict", players)
+
+remote func sync_dict(dict):
+	players = dict
+	print(players)
+	
+
+func update_server():
+	if (get_tree().is_network_server()):
+		update_player_info(Gamestate.player_info)
+	else:
+		rpc_id(1, "update_player_info", Gamestate.player_info)
 
 remote func update_player_info(pinfo):
-	for id in players:
-		if (id != pinfo.net_id):
-			rpc_id(id, "update_player_info", pinfo)
+	if (get_tree().is_network_server()):
+		for id in players:
+			if (id != 1):
+				rpc_id(id, "update_player_info", pinfo)
 	players[pinfo.net_id] = pinfo
 	emit_signal("player_list_changed")
 

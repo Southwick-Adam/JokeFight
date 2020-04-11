@@ -5,4 +5,3 @@ var player_info = {
 	net_id = 1,                        # By default everyone receives "server ID"
 	character = null,
 }
-

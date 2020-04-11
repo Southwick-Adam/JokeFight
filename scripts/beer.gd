@@ -8,7 +8,7 @@ func _ready():
 	var rngx = randf()
 	var rngy = randf()
 	velocity.y = -450 - (300 * rngy)
-	velocity.x += get_node("/root/main/adam/KinematicBody2D/Sprite").scale.x * (650 + (300 * rngx))
+	velocity.x += get_node("/root/main/adam/KinematicBody2D/Sprite").scale.x * (450 + (300 * rngx))
 	print(velocity)
 	print("test")
 

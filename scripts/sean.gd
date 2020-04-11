@@ -35,7 +35,6 @@ func _input(event):
 		ult_shots -= 1
 
 func _process(_delta):
-	print($ReloadTimer.time_left)
 	if can_shoot == false:
 		$ReloadTimer.paused = false
 	else:

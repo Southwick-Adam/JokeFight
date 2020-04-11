@@ -59,16 +59,16 @@ Andy = ExtResource( 6 )
 [node name="terrain" parent="." instance=ExtResource( 1 )]
 position = Vector2( -3.01468, 33.1614 )
 
-[node name="1" type="Position2D" parent="."]
+[node name="bar1" type="Position2D" parent="."]
 
-[node name="2" type="Position2D" parent="."]
-position = Vector2( 860, 0 )
+[node name="bar2" type="Position2D" parent="."]
+position = Vector2( 1020, 0 )
 
-[node name="3" type="Position2D" parent="."]
+[node name="bar3" type="Position2D" parent="."]
 position = Vector2( 0, 525 )
 
-[node name="4" type="Position2D" parent="."]
-position = Vector2( 860, 525 )
+[node name="bar4" type="Position2D" parent="."]
+position = Vector2( 1020, 525 )
 
 [node name="spawn1" type="Position2D" parent="."]
 position = Vector2( 253.426, 217.805 )

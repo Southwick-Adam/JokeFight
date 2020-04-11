@@ -19,10 +19,9 @@ var backsteps = 2
 
 func _ready():
 	var node = Bars.instance()
-	bars = node
-	bars._set_player(self)
-	get_parent().add_child(node)
-	node.global_position = get_node("/root/main/1").position
+	node._set_player(self)
+	get_node("/root/main").call_deferred("add_child", node)
+	node.global_position = get_node("/root/main").get_node("bar1").position
 
 func _process(_delta):
 #GRAVITY

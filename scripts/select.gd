@@ -35,7 +35,6 @@ func _on_player_list_changed():
 	for c in $V.get_children():
 		c.queue_free()
 # Now iterate through the player list creating a new entry into the list
-	print(str(Network.players) + "test")
 	for p in Network.players:
 		var nlabel = Label.new()
 		if Network.players[p].character == null:
@@ -50,7 +49,6 @@ remote func _start_game():
 	# Spawn all the people
 	for id in Network.players:
 		get_node("/root/main")._spawn(Network.players[id].character)
-	print("starting game")
 	queue_free()
 
 func _choose(choice):
@@ -66,13 +64,13 @@ func _choose(choice):
 		elif choice == 3:
 			choice_name = ("Andy")
 		Gamestate.player_info.character = choice_name
-		Network.update_player_info(Gamestate.player_info)
+		Network.update_server()
 
 func _unchoose():
 	get_child(choice).get_node("lock").hide()
 	_spawn()
 	Gamestate.player_info.character = null
-	Network.update_player_info(Gamestate.player_info)
+	Network.update_server()
 
 remote func _lock(num):
 	get_child(num).get_node("lock").show()

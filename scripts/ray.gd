@@ -34,7 +34,6 @@ func _input(event):
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	print($UltTimer.time_left)
 	$KinematicBody2D/Sprite/handR/weapon/Sprite2.global_position = $KinematicBody2D/Sprite/handL.global_position
 	$KinematicBody2D/Sprite/handR/weapon/Sprite2.rotation = $KinematicBody2D/Sprite/handL.rotation
 	$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D2.global_position = $KinematicBody2D/Sprite/handL.global_position
