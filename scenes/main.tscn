@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://scenes/terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/main.gd" type="Script" id=2]
@@ -7,6 +7,8 @@
 [ext_resource path="res://scenes/adam.tscn" type="PackedScene" id=5]
 [ext_resource path="res://scenes/andy.tscn" type="PackedScene" id=6]
 [ext_resource path="res://scenes/spawner.tscn" type="PackedScene" id=7]
+[ext_resource path="res://assets/pixel.png" type="Texture" id=8]
+[ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=9]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -48,6 +50,13 @@ tracks/2/keys = {
 "update": 0,
 "values": [ 0.0, 0.05, -0.13, 0.2, -0.3 ]
 }
+
+[sub_resource type="DynamicFont" id=2]
+size = 70
+outline_color = Color( 0.85098, 0.85098, 0.85098, 1 )
+use_mipmaps = true
+use_filter = true
+font_data = ExtResource( 9 )
 
 [node name="main" type="Node2D"]
 script = ExtResource( 2 )
@@ -91,8 +100,40 @@ offset_h = 0.1
 offset_v = -0.3
 
 [node name="spawner" parent="." instance=ExtResource( 7 )]
-position = Vector2( 620.782, -60.0389 )
-Sean = null
-Adam = null
-Ray = null
-Andy = null
+position = Vector2( 1065.21, -72.1108 )
+
+[node name="win" type="CanvasLayer" parent="."]
+
+[node name="Sprite" type="Sprite" parent="win"]
+visible = false
+self_modulate = Color( 0.231373, 0.231373, 0.231373, 1 )
+position = Vector2( 586.644, 351.986 )
+scale = Vector2( 1209.84, 733.416 )
+texture = ExtResource( 8 )
+
+[node name="Label" type="Label" parent="win"]
+visible = false
+margin_left = 270.212
+margin_top = 127.995
+margin_right = 922.212
+margin_bottom = 388.995
+custom_fonts/font = SubResource( 2 )
+text = "Player wins
+
+Everybody else suc kit"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Button" type="Button" parent="win"]
+visible = false
+margin_left = 526.202
+margin_top = 494.203
+margin_right = 728.202
+margin_bottom = 578.203
+text = "RETURN TO LOBBY"
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="pressed" from="win/Button" to="." method="_on_Button_pressed"]

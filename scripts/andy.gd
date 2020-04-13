@@ -83,3 +83,6 @@ func _harm(body):
 	var rng = randf()
 	body._damage(3 + (3 * rng))
 	$KinematicBody2D.sp += 2 + (2 * rng)
+
+func _on_DeathTimer_timeout():
+	_on_ReloadTimer_timeout()

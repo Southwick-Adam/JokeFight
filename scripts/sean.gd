@@ -130,3 +130,6 @@ func _end_ult():
 	else:
 		$KinematicBody2D/Sprite/handR/weapon.show()
 	$AnimationPlayer2.stop()
+
+func _on_DeathTimer_timeout():
+	_on_ReloadTimer_timeout()

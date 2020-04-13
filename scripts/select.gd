@@ -7,13 +7,14 @@ export (PackedScene) var Game
 var selector
 var choice = 0
 var choice_name
+var made_change = true
+var first = true
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# Update the lblLocalPlayer label widget to display the local player name
 	$V/Label.text = (str(Gamestate.player_info.name) + " - Spectating")
-	_spawn()
 
 func _input(event):
 	#START GAME
@@ -43,17 +44,28 @@ func _on_player_list_changed():
 		else:
 			nlabel.text = (str(Network.players[p].name) + " - " + str(Network.players[p].character))
 		$V.add_child(nlabel)
+#PRE SELECT OTHER PLAYERS CHOICES
+	if first and Gamestate.player_info.net_id != 1:
+		first = false
+		var n = 0
+		while n < (Network.players.size()):
+			var targ = Network.players.keys()[n]
+			for child in get_children():
+				if child.name == Network.players[targ].character:
+					child.get_node("lock").show()
+			n += 1
+		_spawn()
 
 remote func _start_game():
 	var game = Game.instance()
 	get_tree().get_root().add_child(game)
+	game._set_lives($SpinBox.value)
 # Spawn all the people
 	for id in Network.players:
 		get_node("/root/main")._spawn(Network.players[id].character)
 	queue_free()
 
 func _choose(choice):
-	_lock(choice)
 	rpc("_lock", choice)
 	if choice == 0:
 		choice_name = ("sean")
@@ -72,7 +84,7 @@ func _unchoose():
 	Gamestate.player_info.character = null
 	Network.update_server()
 
-remote func _lock(num):
+remotesync func _lock(num):
 	get_child(num).get_node("lock").show()
 
 func _spawn():
@@ -80,5 +92,11 @@ func _spawn():
 	add_child(selector)
 	selector.global_position = get_child(choice).global_position
 
+func _on_SpinBox_value_changed(value):
+	if made_change:
+		rset("life_change", value)
 
-
+func life_change(value):
+	made_change = false
+	$SpinBox.value = value
+	made_change = true

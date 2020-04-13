@@ -69,7 +69,7 @@ margin_top = -11.1494
 margin_right = 320.896
 margin_bottom = 31.8506
 custom_fonts/font = SubResource( 3 )
-text = "Player"
+text = "test"
 max_length = 10
 __meta__ = {
 "_edit_use_anchors_": false

@@ -128,3 +128,6 @@ func _on_UltTimer_timeout():
 	if $KinematicBody2D.gun_mode:
 		$KinematicBody2D/Sprite/gun.show()
 	$KinematicBody2D.SPEED = 400
+
+func _on_DeathTimer_timeout():
+	_on_ReloadTimer_timeout()

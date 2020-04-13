@@ -173,10 +173,10 @@ __meta__ = {
 }
 
 [node name="title2" type="Label" parent="."]
-margin_left = 293.544
-margin_top = 445.74
-margin_right = 857.545
-margin_bottom = 500.74
+margin_left = 166.172
+margin_top = 436.305
+margin_right = 730.173
+margin_bottom = 491.305
 custom_fonts/font = SubResource( 3 )
 text = "Z - SELECT"
 align = 1
@@ -185,10 +185,10 @@ __meta__ = {
 }
 
 [node name="title3" type="Label" parent="."]
-margin_left = 522.342
-margin_top = 445.74
-margin_right = 1086.34
-margin_bottom = 500.74
+margin_left = 394.97
+margin_top = 436.305
+margin_right = 958.968
+margin_bottom = 491.305
 custom_fonts/font = SubResource( 3 )
 text = " X - DESELECT"
 align = 1
@@ -197,12 +197,24 @@ __meta__ = {
 }
 
 [node name="title4" type="Label" parent="."]
-margin_left = 380.818
-margin_top = 533.014
-margin_right = 944.819
-margin_bottom = 588.014
+margin_left = 649.714
+margin_top = 436.306
+margin_right = 1213.72
+margin_bottom = 491.306
 custom_fonts/font = SubResource( 3 )
 text = " ENTER - START"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="title5" type="Label" parent="."]
+margin_left = 244.011
+margin_top = 530.655
+margin_right = 808.012
+margin_bottom = 585.655
+custom_fonts/font = SubResource( 3 )
+text = "LIVES:"
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -227,3 +239,15 @@ __meta__ = {
 [node name="Label" type="Label" parent="V"]
 margin_right = 40.0
 margin_bottom = 14.0
+
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_left = 585.0
+margin_top = 531.13
+margin_right = 663.0
+margin_bottom = 572.13
+min_value = 1.0
+value = 5.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+[connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]

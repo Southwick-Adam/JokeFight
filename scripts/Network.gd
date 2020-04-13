@@ -97,20 +97,19 @@ func _join_server(ip, port):
 		return
 	get_tree().set_network_peer(client)
 
-# Peer trying to connect to server is notified on success
 func _on_connected_to_server():
 	emit_signal("join_success")
 
-# Peer trying to connect to server is notified on failure
 func _on_connection_failed():
 	emit_signal("join_fail")
 	get_tree().set_network_peer(null)
 
-# Peer is notified when disconnected from server
 func _on_disconnected_from_server():
 	print("Disconnected from server")
-	# Clear the internal player list
 	players.clear()
-	# Reset the player info network ID
 	Gamestate.player_info.net_id = 1
-	get_tree().change_scene("res://scenes/server_screen.tscn")
+	for child in get_node("/root").get_children():
+		child.queue_free()
+	var node
+	load("res://scenes/server_screen.tscn").instance()
+	get_tree().get_root().add_child(node)

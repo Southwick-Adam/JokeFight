@@ -89,3 +89,7 @@ func _harm(body):
 	var rng = randf()
 	body._damage(5 + (3 * rng))
 	$KinematicBody2D.sp += 2 + (2 * rng)
+
+func _on_DeathTimer_timeout():
+	$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/chef.png")
+	_on_ReloadTimer_timeout()

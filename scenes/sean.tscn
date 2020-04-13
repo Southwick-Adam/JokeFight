@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=2]
+[gd_scene load_steps=30 format=2]
 
 [ext_resource path="res://animations/stab.tres" type="Animation" id=1]
 [ext_resource path="res://animations/attack.tres" type="Animation" id=2]
@@ -23,6 +23,7 @@
 [ext_resource path="res://scenes/sean_ult_marks.tscn" type="PackedScene" id=21]
 [ext_resource path="res://assets/players/sean/eyes.png" type="Texture" id=22]
 [ext_resource path="res://assets/players/sean/glow.png" type="Texture" id=23]
+[ext_resource path="res://animations/die.tres" type="Animation" id=24]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25, 6 )
@@ -343,6 +344,7 @@ anims/run = ExtResource( 5 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
 anims/attack = ExtResource( 2 )
+anims/die = ExtResource( 24 )
 anims/gun = ExtResource( 16 )
 anims/stab = ExtResource( 1 )
 anims/ult = SubResource( 5 )
@@ -357,7 +359,7 @@ one_shot = true
 [node name="UltTimer" type="Timer" parent="."]
 
 [node name="DeathTimer" type="Timer" parent="."]
-wait_time = 0.5
+wait_time = 1.5
 one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
 [connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam" to="." method="_on_beam_body_entered"]
@@ -366,3 +368,4 @@ one_shot = true
 [connection signal="timeout" from="BoomTimer" to="." method="_on_BoomTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
