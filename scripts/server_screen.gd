@@ -10,7 +10,6 @@ func _ready():
 	Network.connect("join_success", self, "_on_ready_to_play")
 	Network.connect("join_fail", self, "_on_join_fail")
 	$name/LineEdit.text = Gamestate.player_info.name
-	
 
 func _on_btnCreate_pressed():
 	Gamestate.player_info.name = $name/LineEdit.text

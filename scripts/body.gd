@@ -16,20 +16,20 @@ var gun_mode = false
 var req = false
 var bars
 var backsteps = 2
-var master_character = false
 var lives
+var attack_num = 0
 
-#SLAVE VARS
-slave var slave_position = Vector2()
-slave var slave_velocity = Vector2()
+onready var hurt_timer = 0.1
+onready var pos_update_timer = 0.5
+
+#PUPPET VARS
+puppet var slave_position = Vector2()
+puppet var slave_velocity = Vector2()
 
 signal backstep
-signal dead
 
 func _ready():
 	lives = get_node("/root/main").lives
-	if Gamestate.player_info.character == get_parent().name:
-		master_character = true
 	var number = 0
 	var n = 0
 	while n < Network.players.size():
@@ -44,31 +44,40 @@ func _ready():
 	node._set_player(self)
 	node._set_num(number)
 
-func _process(_delta):
-	#rset("slave_position", position)
+func _process(delta):
+	if hurt_timer >= 0:
+		hurt_timer -= delta
+	if hurt_timer <= 0 and health > 0:
+		modulate = Color(1,1,1)
 #GRAVITY
 	velocity.y += GRAVITY
 #RIGHT/LEFT MOVEMENT
-	if master_character:
+	if is_network_master():
 		if Input.is_action_pressed("ui_right"):
 			velocity.x = min(velocity.x + ACCELERATION, SPEED)
-			#rset("slave_velocity", velocity)
 		elif Input.is_action_pressed("ui_left"):
 			velocity.x = max(velocity.x - ACCELERATION, -SPEED)
-			#rset("slave_velocity", velocity)
 		else:
 			if is_on_floor():
 				velocity.x = lerp(velocity.x, 0, 0.4)
 			else:
 				velocity.x = lerp(velocity.x, 0, 0.05)
-	#else:
-		#velocity = slave_velocity
-		#position = slave_position
+		rset("slave_velocity", velocity)
+		rset("slave_position", position)
+	else:
+		velocity.x = slave_velocity.x
+		if pos_update_timer >= 0:
+			pos_update_timer -= delta
+		else:
+			if abs(position.x - slave_position.x) > 20 or abs(position.y - slave_position.y) > 20:
+				position = slave_position
+			pos_update_timer = 0.5
+#VELOCITY PROCESSING
 	velocity = move_and_slide(velocity, UP)
 #ANIMATIONS
 	if is_on_floor():
 		doublejump = true
-		if abs(velocity.x) >= 5 and (Input.is_action_pressed("ui_right") or Input.is_action_pressed("ui_left")):
+		if abs(velocity.x) >= 120 and velocity.x/$Sprite.scale.x > 0:
 			_animate("run")
 		else:
 			_animate("idle")
@@ -83,57 +92,82 @@ func _process(_delta):
 		sp = 100
 
 func _input(event):
-	if master_character:
-		if event.is_action_pressed("ui_left"):
-			$Sprite.scale = Vector2(-1, 1)
-		elif event.is_action_pressed("ui_right"):
-			$Sprite.scale = Vector2(1, 1)
-		if event.is_action_pressed("ui_up"):
-			if is_on_floor():
+	var ev
+	if event.is_action_pressed("ui_left"):
+		ev = ("left")
+	elif event.is_action_pressed("ui_right"):
+		ev = ("right")
+	elif event.is_action_pressed("ui_up"):
+		ev = ("up")
+#BACK STEP
+	if event.is_action_pressed("ui_down") and not get_parent().get_node("AnimationPlayer").current_animation == ("run") and backsteps > 0:
+		ev = ("down")
+#PRESS Z
+	if event.is_action_pressed("z"):
+		ev = ("z")
+#PRESS X
+	elif event.is_action_pressed("x") and not gun_mode:
+		ev = ("x")
+#PRESS C
+	elif event.is_action_pressed("c"):
+		ev = ("c")
+	elif event.is_action_pressed("v"):
+		ev = ("v")
+	#ULT
+#			if sp == 100:
+#				sp = 0
+#				$Sprite/head/eyes.show()
+#				get_parent()._ult()
+#	#SP MINI
+#			elif sp < 100 and sp >= 33 and gun_mode == req:
+#				sp -= 33
+#				get_parent()._sp_mini()
+	if is_network_master():
+		rpc("_input_effect", ev)
+
+remotesync func _input_effect(event):
+	if event == ("left"):
+		$Sprite.scale = Vector2(-1, 1)
+	elif event == ("right"):
+		$Sprite.scale = Vector2(1, 1)
+	if event == ("up"):
+		if is_on_floor():
+			velocity.y = JUMP
+		else:
+			if doublejump:
 				velocity.y = JUMP
-			else:
-				if doublejump:
-					velocity.y = JUMP
-					doublejump = false
-	#BACK STEP
-		if event.is_action_pressed("ui_down") and not get_parent().get_node("AnimationPlayer").current_animation == ("run") and backsteps > 0:
-			_backstep()
-	#PRESS Z
-		if event.is_action_pressed("z"):
-			if gun_mode:
-				$Sprite/handR/weapon.show()
-				gun_mode = false
-				$Sprite/gun.hide()
-				get_parent().get_node("AnimationPlayer2").stop()
-			else:
-				var rng = randf()
-				if rng < 0.7:
+				doublejump = false
+	if event == ("down"):
+		_backstep()
+	if event == ("z"):
+		if gun_mode:
+			$Sprite/handR/weapon.show()
+			gun_mode = false
+			$Sprite/gun.hide()
+			get_parent().get_node("AnimationPlayer2").stop()
+		else:
+			var attack_anims = ["attack", "stab"]
+			if not attack_anims.has(get_parent().get_node("AnimationPlayer2").current_animation):
+				if attack_num < 2:
 					_animate2("attack")
+					attack_num += 1
 				else:
 					_animate2("stab")
-	#PRESS X
-		elif event.is_action_pressed("x") and not gun_mode:
-			$Sprite/handR/weapon.hide()
-			gun_mode = true
-			$Sprite/gun.show()
-	#PRESS C
-		elif event.is_action_pressed("c"):
-			get_parent()._ult()#TEST
-			$Sprite/head/eyes.show()#TEST
-		elif event.is_action_pressed("v"):
-			get_parent()._sp_mini()#TEST
-	#ULT
-			if sp == 100:
-				sp = 0
-				$Sprite/head/eyes.show()
-				get_parent()._ult()
-	#SP MINI
-			elif sp < 100 and sp >= 33 and gun_mode == req:
-				sp -= 33
-				get_parent()._sp_mini()
+					attack_num = 0
+	if event == ("x") and get_parent().ult == false:
+		$Sprite/handR/weapon.hide()
+		gun_mode = true
+		$Sprite/gun.show()
+	if event == ("c"):
+		get_parent()._ult()#TEST
+		$Sprite/head/eyes.show()#TEST
+	if event == ("v"):
+		get_parent()._sp_mini()#TEST
 
 func _damage(num):
 	if not get_parent().ult == true:
+		hurt_timer = 0.1
+		modulate = Color(0.9,0,0)
 		health -= num
 		sp += 2 * num/3
 		if health <= 0:
@@ -144,13 +178,8 @@ func _animate(anim):
 		get_parent().get_node("AnimationPlayer").play(anim)
 
 func _animate2(anim):
-	var attack_anims = ["attack", "stab"]
-	if attack_anims.has(anim):
-		if not attack_anims.has(get_parent().get_node("AnimationPlayer2").current_animation):
-			get_parent().get_node("AnimationPlayer2").play(anim)
-	else:
-		if get_parent().get_node("AnimationPlayer2").current_animation != (anim):
-			get_parent().get_node("AnimationPlayer2").play(anim)
+	if get_parent().get_node("AnimationPlayer2").current_animation != (anim):
+		get_parent().get_node("AnimationPlayer2").play(anim)
 
 func _on_weapon_body_entered(body):
 	if body != self:
@@ -189,7 +218,6 @@ func _on_DeathTimer_timeout():
 		lives -= 1
 	else:
 		lives -= 1
-		get_node("/root/main")._player_died()
 		get_parent().queue_free()
 	modulate.a = 1
 	$Sprite/head/eyes.hide()
@@ -203,3 +231,4 @@ func _on_DeathTimer_timeout():
 	set_collision_mask_bit(2, false)
 	get_node("/root/main/spawner")._respawn(self)
 	get_parent().get_node("AnimationPlayer2").stop()
+	pos_update_timer = 0.1

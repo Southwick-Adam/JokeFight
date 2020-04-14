@@ -5,10 +5,10 @@ export (PackedScene) var Boom
 var velocity = Vector2(0,0)
 
 func _ready():
-	var rngx = randf()
-	var rngy = randf()
-	velocity.y = -450 - (300 * rngy)
-	velocity.x += get_node("/root/main/adam/KinematicBody2D/Sprite").scale.x * (450 + (300 * rngx))
+	velocity.y = -600
+
+func _set_vel_x(num):
+	velocity.x += num
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
@@ -25,3 +25,4 @@ func _on_Area2D_body_entered(body):
 
 func _veloc(veloc):
 	velocity.x += veloc
+

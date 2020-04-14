@@ -23,7 +23,9 @@ use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 2 )
 
-[node name="bars" type="Node2D"]
+[node name="bars" type="Node2D" groups=[
+"bar",
+]]
 scale = Vector2( 0.8, 0.8 )
 z_index = 10
 script = ExtResource( 4 )

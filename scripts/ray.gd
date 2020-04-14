@@ -14,7 +14,17 @@ func _ready():
 	pass
 
 func _input(event):
-	if event.is_action_pressed("x"):
+	if is_network_master():
+		var ev
+		if event.is_action_pressed("x") and not ult:
+			ev = ("x")
+		if event.is_action_pressed("c") and ult:
+			ev = ("c")
+		if ev != null:
+			rpc("_input_effect", ev)
+
+remotesync func _input_effect(event):
+	if event == ("x"):
 		if smash_out:
 			get_node("/root/main/smash")._delete()
 			smash_out = false
@@ -29,7 +39,7 @@ func _input(event):
 				$KinematicBody2D.SPEED = 0
 				can_shoot = false
 				smash_out = true
-	if event.is_action_pressed("c") and ult:
+	if event == ("c"):
 		$KinematicBody2D._animate2("ult")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

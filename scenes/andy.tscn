@@ -33,9 +33,8 @@ blend_mode = 1
 min_value = 0.2
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.344828, 0.471402 ), -0.669031, -0.669031, 0, 0, Vector2( 0.396552, 0.274475 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="CapsuleShape2D" id=4]
-radius = 24.0864
-height = 38.4879
+[sub_resource type="RectangleShape2D" id=8]
+extents = Vector2( 20, 42 )
 
 [sub_resource type="DynamicFont" id=5]
 size = 18
@@ -338,7 +337,7 @@ position = Vector2( -0.460909, -41.2865 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 1.2605, -6.96839 )
-shape = SubResource( 4 )
+shape = SubResource( 8 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
 margin_left = -8.15644

@@ -5,6 +5,7 @@ signal server_creation_failed
 signal join_success
 signal join_fail
 signal player_list_changed
+signal player_disconnect
 
 var server_info = {
 	name = "Server",
@@ -81,6 +82,13 @@ remote func update_player_info(pinfo):
 
 remote func unregister_player(id):
 	print("Removing player ", players[id].name, " from internal table")
+	if get_node("/root/main") != null:
+		for child in get_node("/root/main").get_children():
+			if child.name == players[id].character:
+				get_node("/root/main")._player_died()
+				child.queue_free()
+	emit_signal("player_disconnect", id)
+	
 	# Remove the player from the list
 	players.erase(id)
 	# And notify the list has been changed
@@ -111,5 +119,5 @@ func _on_disconnected_from_server():
 	for child in get_node("/root").get_children():
 		child.queue_free()
 	var node
-	load("res://scenes/server_screen.tscn").instance()
+	node = load("res://scenes/server_screen.tscn").instance()
 	get_tree().get_root().add_child(node)

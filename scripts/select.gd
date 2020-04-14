@@ -15,6 +15,7 @@ func _ready():
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# Update the lblLocalPlayer label widget to display the local player name
 	$V/Label.text = (str(Gamestate.player_info.name) + " - Spectating")
+	_spawn()
 
 func _input(event):
 	#START GAME
@@ -54,7 +55,6 @@ func _on_player_list_changed():
 				if child.name == Network.players[targ].character:
 					child.get_node("lock").show()
 			n += 1
-		_spawn()
 
 remote func _start_game():
 	var game = Game.instance()
@@ -94,9 +94,9 @@ func _spawn():
 
 func _on_SpinBox_value_changed(value):
 	if made_change:
-		rset("life_change", value)
+		rpc("life_change", value)
 
-func life_change(value):
+remotesync func life_change(value):
 	made_change = false
 	$SpinBox.value = value
 	made_change = true

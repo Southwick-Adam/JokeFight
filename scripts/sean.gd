@@ -19,16 +19,29 @@ func _ready():
 	_boom_state(1)
 	
 func _input(event):
-	if event.is_action_pressed("x") and can_shoot:
+	if is_network_master():
+		var ev
+		if event.is_action_pressed("x") and can_shoot:
+			ev = ("fire")
+		if event.is_action_released("x"):
+			ev = ("release")
+	#ULT SHOOTING
+		if event.is_action_pressed("c") and can_ult_shoot and ult_shots > 0:
+			ev = ("c")
+		if ev != null:
+			rpc("_input_effect", ev)
+
+remotesync func _input_effect(event):
+	if event == ("fire"):
 		$KinematicBody2D/Sprite/gun/beam.show()
 		$KinematicBody2D/Sprite/gun/beam.monitoring = true
 		$ReloadTimer.paused = false
-	if event.is_action_released("x"):
+	elif event == ("release"):
 		$KinematicBody2D/Sprite/gun/beam.hide()
 		$KinematicBody2D/Sprite/gun/beam.monitoring = false
 		$ReloadTimer.paused = true
 #ULT SHOOTING
-	if event.is_action_pressed("c") and can_ult_shoot and ult_shots > 0:
+	if event == ("c"):
 		var node = Marks.instance()
 		get_node("/root/main/sean_ult").add_child(node)
 		node.global_position = Vector2(get_node("/root/main/sean_ult/bar").global_position.x, 690)

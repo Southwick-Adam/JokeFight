@@ -31,9 +31,8 @@ extents = Vector2( 25, 6 )
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 865.497, 10 )
 
-[sub_resource type="CapsuleShape2D" id=3]
-radius = 24.0864
-height = 38.4879
+[sub_resource type="RectangleShape2D" id=6]
+extents = Vector2( 20, 42 )
 
 [sub_resource type="DynamicFont" id=4]
 size = 18
@@ -321,9 +320,8 @@ texture = ExtResource( 23 )
 offset = Vector2( 15.0251, 0.302291 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
-visible = false
 position = Vector2( 1.2605, -6.96839 )
-shape = SubResource( 3 )
+shape = SubResource( 6 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
 margin_left = -8.15644

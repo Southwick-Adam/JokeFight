@@ -20,14 +20,28 @@ func _process(_delta):
 		$AnimationPlayer2.play("gun")
 
 func _input(event):
-#CHEFS COAT
-	if event.is_action_pressed("z"):
-		$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/chef.png")
-	elif event.is_action_pressed("x") or event.is_action_pressed("c"):
-		$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/body.png")
+	if is_network_master():
+		var ev
+		if event.is_action_pressed("z"):
+			ev = ("z")
+			rpc("_input_effect", ev)
+		elif event.is_action_pressed("x") or event.is_action_pressed("c"):
+			ev = ("blue_shirt")
+			rpc("_input_effect", ev)
 #SHOOT
-	if event.is_action_pressed("x") and can_shoot and $KinematicBody2D.gun_mode:
-		_beer_toss()
+		if event.is_action_pressed("x") and can_shoot and $KinematicBody2D.gun_mode:
+			ev = ("shoot")
+			if ev != null:
+				rpc("_input_effect", ev)
+
+remotesync func _input_effect(event):
+	if event == ("z"):
+		$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/chef.png")
+	elif event == ("blue_shirt"):
+		$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/body.png")
+	#SHOOT
+	if event == ("shoot"):
+		_beer_toss(700)
 		
 func _on_ReloadTimer_timeout():
 	for child in $KinematicBody2D/Sprite/gun.get_children():
@@ -69,10 +83,10 @@ func _ult():
 func _sp_mini():
 	var n = beer_num
 	while n < 6:
-		_beer_toss()
+		_beer_toss(550 + (n * 80))
 		n += 1
 
-func _beer_toss():
+func _beer_toss(num):
 	$KinematicBody2D/Sprite/gun.get_child(beer_num).hide()
 	$AnimationPlayer2.play("fire")
 	beer_num += 1
@@ -82,6 +96,7 @@ func _beer_toss():
 	var node = Beer.instance()
 	get_node("/root/main").call_deferred("add_child", node)
 	node.position = $KinematicBody2D/Sprite/gun.global_position - Vector2(0,5)
+	node._set_vel_x($KinematicBody2D/Sprite.scale.x * num)
 	node._veloc($KinematicBody2D.velocity.x)
 
 #WEAPON DAMAGING OTHERS

@@ -21,8 +21,16 @@ func _process(_delta):
 	var not_gun_anims = ["ult", "fire"]
 	if $KinematicBody2D.gun_mode == true and not not_gun_anims.has($AnimationPlayer2.current_animation):
 		$AnimationPlayer2.play("gun")
+
 func _input(event):
-	if event.is_action_pressed("x") and can_shoot and $KinematicBody2D.gun_mode:
+	if is_network_master():
+		if event.is_action_pressed("x") and can_shoot and $KinematicBody2D.gun_mode:
+			var ev = ("shoot") 
+			if ev != null:
+				rpc("_input_effect", ev)
+
+remotesync func _input_effect(event):
+	if event == ("shoot"):
 		_shoot()
 
 func _on_ReloadTimer_timeout():
