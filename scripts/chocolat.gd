@@ -19,16 +19,15 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	if body != get_node("/root/main/charlotte/KinematicBody2D"):
 		if body.is_in_group("player"):
-			if body.get_node("smudge") != null:
-				var node = Smudge.instance()
-				body.add_child(node)
-				node.position = body.global_position
-			else:
-				body.get_node("smudge")._hit()
-			body.SPEED -= 50
-			queue_free()
-		else:
-			queue_free()
+			if not (get_node("/root/main/charlotte/Kinematic2D").gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
+				if body.get_node("smudge") != null:
+					var node = Smudge.instance()
+					body.add_child(node)
+					node.position = body.global_position
+				else:
+					body.get_node("smudge")._hit()
+				body.SPEED -= 50
+		queue_free()
 
 func _veloc(veloc):
 	velocity.x += veloc

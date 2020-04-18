@@ -18,6 +18,8 @@ func _ready():
 
 
 func _process(delta):
+	if get_node("/root/main/ray") == null:
+		queue_free()
 	position += velocity * delta
 	velocity.y += gravity
 	if started:
@@ -45,8 +47,9 @@ func _process(delta):
 #DAMAGE
 	if not target.empty():
 		for targ in target:
-			targ._damage(0.4)
-			get_node("/root/main/ray/KinematicBody2D").sp += 0.2
+			if not (get_node("/root/main/ray/Kinematic2D").gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
+				targ._damage(0.4)
+				get_node("/root/main/ray/KinematicBody2D").sp += 0.2
 
 func _on_StartTimer_timeout():
 	rot = 0.4

@@ -34,12 +34,13 @@ font_data = ExtResource( 2 )
 script = ExtResource( 3 )
 
 [node name="Label" type="Label" parent="."]
-margin_left = 457.449
-margin_top = 49.4539
-margin_right = 721.449
-margin_bottom = 110.454
+margin_left = 248.236
+margin_top = 52.2434
+margin_right = 935.236
+margin_bottom = 113.244
 custom_fonts/font = SubResource( 1 )
-text = "GAME TITLE"
+text = "GARBAGE PEOPLE: THE GAME"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

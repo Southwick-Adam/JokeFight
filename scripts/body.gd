@@ -18,9 +18,11 @@ var bars
 var backsteps = 2
 var lives
 var attack_num = 0
+var gay = false
 
 onready var hurt_timer = 0.1
 onready var pos_update_timer = 0.5
+onready var gay_timer = 0.1
 
 #PUPPET VARS
 puppet var slave_position = Vector2()
@@ -48,10 +50,17 @@ func _ready():
 	node._set_num(number)
 
 func _process(delta):
+	if health > 100:
+		health = 100
 	if hurt_timer >= 0:
 		hurt_timer -= delta
 	if hurt_timer <= 0 and health > 0:
 		modulate = Color(1,1,1)
+	if gay_timer >= 0:
+		gay_timer -= delta
+	else:
+		gay = false
+		get_node("gay").queue_free()
 #GRAVITY
 	velocity.y += GRAVITY
 #RIGHT/LEFT MOVEMENT
@@ -192,7 +201,8 @@ func _animate2(anim):
 func _on_weapon_body_entered(body):
 	if body != self:
 		if body.is_in_group("player"):
-			get_parent()._harm(body)
+			if not (gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
+				get_parent()._harm(body)
 
 func _backstep():
 	if is_on_floor():
@@ -240,3 +250,7 @@ func _on_DeathTimer_timeout():
 	get_node("/root/main/spawner")._respawn(self)
 	get_parent().get_node("AnimationPlayer2").stop()
 	pos_update_timer = 0.1
+
+func _gay():
+	gay_timer = 10
+	gay = true

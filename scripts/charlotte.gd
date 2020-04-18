@@ -11,12 +11,14 @@ var sp_true = false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	$KinematicBody2D.req = true#TEMP
+	$KinematicBody2D.req = true
 
 func _process(_delta):
 	var not_gun_anims = ["ult", "fire"]
 	if $KinematicBody2D.gun_mode == true and not not_gun_anims.has($AnimationPlayer2.current_animation):
 		$AnimationPlayer2.play("gun")
+	if $KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a > 0:
+		$KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a -= 0.01
 
 func _input(event):
 	if is_network_master():
@@ -58,13 +60,15 @@ func _ult():
 	$KinematicBody2D.velocity = Vector2(0,0)
 	var node = Ult.instance()
 	get_node("/root/main").call_deferred("add_child", node)
-	node.global_position = $KinematicBody2D.global_position - Vector2(0,30)
+	node.global_position = Vector2($KinematicBody2D/Sprite/Position2D.global_position.x, 0)
 	$UltTimer.start()
 
 func _sp_mini():
 	can_shoot = false
 	$ReloadTimer.start()
 	$KinematicBody2D/Sprite/gun.frame = 6
+	$KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a = 1
+	$KinematicBody2D.health += clip * 4
 
 func _shoot():
 	$AnimationPlayer2.play("fire")

@@ -2,15 +2,15 @@
 
 importer="texture"
 type="StreamTexture"
-path="res://.import/ex.png-11cbaed5f55cd51541f7ce6b23cae4f3.stex"
+path="res://.import/gay.png-aa1776191bac650e688202a771512c9d.stex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://assets/players/charlotte/ex.png"
-dest_files=[ "res://.import/ex.png-11cbaed5f55cd51541f7ce6b23cae4f3.stex" ]
+source_file="res://assets/players/hollis/gay.png"
+dest_files=[ "res://.import/gay.png-aa1776191bac650e688202a771512c9d.stex" ]
 
 [params]
 

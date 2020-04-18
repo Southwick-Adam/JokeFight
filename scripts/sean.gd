@@ -55,8 +55,9 @@ func _process(_delta):
 #BEAM
 	if not beam_target.empty():
 		for targ in beam_target:
-			targ._damage(0.4)
-			$KinematicBody2D.sp += 0.2
+			if not ($KinematicBody2D.gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
+				targ._damage(0.4)
+				$KinematicBody2D.sp += 0.2
 #ANIMATE GUN
 	if $KinematicBody2D.gun_mode == true and ult == false:
 		$AnimationPlayer2.play("gun")

@@ -6,6 +6,7 @@ var sing_target = []
 var can_shoot = true
 var ult = false
 onready var sp = $KinematicBody2D.sp
+var flag_hits = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -37,8 +38,8 @@ func _process(_delta):
 	$KinematicBody2D/Sprite/head/gun/beam/Sprite2.rotate(-0.04)
 	if can_shoot == false:
 		$ReloadTimer.paused = false
-#	else:
-#		$KinematicBody2D/Sprite/gun/glow.scale = Vector2($ReloadTimer.time_left/3,$ReloadTimer.time_left/3)
+	else:
+		$KinematicBody2D/Sprite/head/gun/mouth.scale.y = $ReloadTimer.time_left/3
 #BEAM
 	if not sing_target.empty():
 		for targ in sing_target:
@@ -46,8 +47,18 @@ func _process(_delta):
 			$KinematicBody2D.sp += 0.2
 
 func _harm(body):
-	body._damage(8)
-	$KinematicBody2D.sp += 4
+	if flag_hits > 0:
+		body._gay()
+		var gay = Sprite.new()
+		gay.texture = preload("res://assets/players/hollis/gay.png")
+		body.add_child(gay)
+		gay.name = ("gay")
+		gay.global_position = body.global_position
+		flag_hits = 0
+		$KinematicBody2D/Sprite/handR/weapon/Sprite.texture = preload("res://assets/players/hollis/guitar.png")
+	else:
+		body._damage(8)
+		$KinematicBody2D.sp += 4
 
 func _on_beam_body_entered(body):
 	if body.is_in_group("player") and body != get_node("/root/main/hollis/KinematicBody2D"):
@@ -59,7 +70,7 @@ func _on_beam_body_exited(body):
 
 func _on_ReloadTimer_timeout():
 	if can_shoot:
-		$KinematicBody2D/Sprite/head/gun/beam.hide()
+		$KinematicBody2D/Sprite/head/gun.hide()
 		$KinematicBody2D/Sprite/head/gun/beam.monitoring = false
 		can_shoot = false
 		$ReloadTimer.wait_time = 2
@@ -84,7 +95,8 @@ func _ult():
 	$UltTimer.start()
 
 func _sp_mini():
-	pass
+	$KinematicBody2D/Sprite/handR/weapon/Sprite.texture = preload("res://assets/players/hollis/flag.png")
+	flag_hits = 4
 
 func _on_UltTimer_timeout():
 	_end_ult()
@@ -103,3 +115,13 @@ func _end_ult():
 
 func _on_DeathTimer_timeout():
 	_on_ReloadTimer_timeout()
+
+
+func _on_AnimationPlayer2_animation_finished(anim_name):
+	print(flag_hits)
+	if anim_name == ("attck") or anim_name == ("stab"):
+		if flag_hits > 1:
+			flag_hits -= 1
+		else:
+			$KinematicBody2D/Sprite/handR/weapon/Sprite.texture = preload("res://assets/players/hollis/guitar.png")
+			flag_hits -= 1
