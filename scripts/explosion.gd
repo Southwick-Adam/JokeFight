@@ -10,4 +10,5 @@ func _on_Timer_timeout():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
-		body._damage(15)
+		body._damage(14)
+		get_node("/root/main/adam/KinematicBody2D").sp += 6

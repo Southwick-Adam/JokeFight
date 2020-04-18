@@ -25,6 +25,8 @@ onready var pos_update_timer = 0.5
 #PUPPET VARS
 puppet var slave_position = Vector2()
 puppet var slave_velocity = Vector2()
+puppet var slave_health = 100
+puppet var slave_sp = 0
 
 signal backstep
 
@@ -36,6 +38,7 @@ func _ready():
 		var targ = Network.players.keys()[n]
 		number = n
 		if Network.players[targ].character == get_parent().name:
+			$Label.text = Network.players[targ].name
 			break
 		n += 1
 	var node = Bars.instance()
@@ -64,13 +67,17 @@ func _process(delta):
 				velocity.x = lerp(velocity.x, 0, 0.05)
 		rset("slave_velocity", velocity)
 		rset("slave_position", position)
+		rset("slave_health", health)
+		rset("slave_sp", sp)
 	else:
 		velocity.x = slave_velocity.x
 		if pos_update_timer >= 0:
 			pos_update_timer -= delta
 		else:
-			if abs(position.x - slave_position.x) > 20 or abs(position.y - slave_position.y) > 20:
+			if abs(position.x - slave_position.x) > 10 or abs(position.y - slave_position.y) > 10:
 				position = slave_position
+				health = slave_health
+				sp = slave_sp
 			pos_update_timer = 0.5
 #VELOCITY PROCESSING
 	velocity = move_and_slide(velocity, UP)
@@ -165,13 +172,14 @@ remotesync func _input_effect(event):
 		get_parent()._sp_mini()#TEST
 
 func _damage(num):
-	if not get_parent().ult == true:
+	if not get_parent().ult == true and get_parent().get_node("DeathTimer").is_stopped():
 		hurt_timer = 0.1
 		modulate = Color(0.9,0,0)
 		health -= num
 		sp += 2 * num/3
 		if health <= 0:
-			_die()
+			if is_network_master():
+				rpc("_die")
 
 func _animate(anim):
 	if get_parent().get_node("AnimationPlayer").current_animation != (anim):
@@ -195,7 +203,7 @@ func _backstep():
 	emit_signal("backstep")
 	backsteps -= 1
 
-func _die():
+remotesync func _die():
 	$Sprite/head/eyes.show()
 	$Sprite/head/eyes.modulate = Color(0,0,0)
 	$Sprite/handR/weapon.hide()

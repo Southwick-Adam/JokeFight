@@ -31,7 +31,7 @@ radius = 20.0
 [sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 69.857, 54.4251 )
 
-[sub_resource type="RectangleShape2D" id=10]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 42 )
 
 [sub_resource type="DynamicFont" id=4]
@@ -382,8 +382,7 @@ position = Vector2( 0.464579, 4.8883 )
 texture = ExtResource( 14 )
 
 [node name="head" type="Sprite" parent="KinematicBody2D/Sprite"]
-position = Vector2( -1.73813, -24.6726 )
-rotation = -0.0857011
+position = Vector2( -0.412223, -24.6726 )
 z_index = 1
 texture = ExtResource( 1 )
 
@@ -393,8 +392,7 @@ texture = ExtResource( 2 )
 
 [node name="handL" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.784314, 0.682353, 0.482353, 1 )
-position = Vector2( 11.3103, 13.5926 )
-rotation = 1.63521
+position = Vector2( -18.7074, 9.20673 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 2
 texture = ExtResource( 13 )
@@ -407,8 +405,7 @@ texture = ExtResource( 20 )
 
 [node name="handR" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.784314, 0.682353, 0.482353, 1 )
-position = Vector2( 16.4566, 6.45021 )
-rotation = -0.458303
+position = Vector2( 21.3266, 9.69692 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -3
 texture = ExtResource( 13 )
@@ -446,15 +443,15 @@ offset = Vector2( -0.749772, -20.0942 )
 
 [node name="legL" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.203922, 0.203922, 0.203922, 1 )
-position = Vector2( -7.66286, 23.9495 )
-rotation = 0.0241441
+position = Vector2( -8.19322, 23.9495 )
+rotation = 0.0724322
 z_index = -1
 texture = ExtResource( 17 )
 
 [node name="legR" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.203922, 0.203922, 0.203922, 1 )
-position = Vector2( 5.7032, 24.0826 )
-rotation = -0.0379079
+position = Vector2( 7.0291, 24.3478 )
+rotation = -0.113724
 z_index = -2
 texture = ExtResource( 17 )
 
@@ -503,15 +500,15 @@ shape = SubResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 1.2605, -6.96839 )
-shape = SubResource( 10 )
+shape = SubResource( 3 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
-margin_left = -8.15644
-margin_top = -69.3299
-margin_right = 31.8436
-margin_bottom = -46.3299
+margin_left = -102.082
+margin_top = -72.1979
+margin_right = 97.918
+margin_bottom = -49.1978
 custom_fonts/font = SubResource( 4 )
-text = "P1"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -553,5 +550,5 @@ one_shot = true
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="RushTimer" to="." method="_on_RushTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]

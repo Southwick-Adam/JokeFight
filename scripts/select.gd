@@ -27,8 +27,14 @@ func _input(event):
 			if choice > 0:
 				choice -= 1
 		elif event.is_action_pressed("ui_right"):
-			if choice < 3:
+			if choice < 5:
 				choice += 1
+		elif event.is_action_pressed("ui_up"):
+			if choice > 2:
+				choice -= 3
+		elif event.is_action_pressed("ui_down"):
+			if choice < 3:
+				choice += 3
 	if event.is_action_pressed("x"):
 		if Gamestate.player_info.character != null:
 			_unchoose()
@@ -74,7 +80,11 @@ func _choose(choice):
 	elif choice == 2:
 		choice_name = ("ray")
 	elif choice == 3:
+		choice_name = ("hollis")
+	elif choice == 4:
 		choice_name = ("andy")
+	elif choice == 5:
+		choice_name = ("charlotte")
 	Gamestate.player_info.character = choice_name
 	Network.update_server()
 

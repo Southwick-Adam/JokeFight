@@ -3,7 +3,9 @@ extends Node
 export (PackedScene) var Sean
 export (PackedScene) var Adam
 export (PackedScene) var Ray
+export (PackedScene) var Hollis
 export (PackedScene) var Andy
+export (PackedScene) var Charlotte
 
 var lives
 var players_left = Network.players.size()
@@ -20,8 +22,12 @@ func _spawn(choice):
 		node = Adam.instance()
 	elif choice == ("ray"):
 		node = Ray.instance()
+	elif choice == ("hollis"):
+		node = Hollis.instance()
 	elif choice == ("andy"):
 		node = Andy.instance()
+	elif choice == ("charlotte"):
+		node = Charlotte.instance()
 	var n = 0
 	while n < Network.players.size():
 		var targ = Network.players.keys()[n]

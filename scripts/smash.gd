@@ -8,6 +8,8 @@ var rot = 0
 var gravity = 50
 var target = []
 var started = false
+var slave_velocity = Vector2()
+var slave_position = Vector2()
 
 func _ready():
 	set_process_input(false)
@@ -20,23 +22,31 @@ func _process(delta):
 	velocity.y += gravity
 	if started:
 		$Area2D/Sprite.rotate(rot)
-		if Input.is_action_pressed("ui_right"):
-			velocity.x = min(velocity.x + ACCELERATION, SPEED)
-		elif Input.is_action_pressed("ui_left"):
-			velocity.x = max(velocity.x - ACCELERATION, -SPEED)
+		if is_network_master():
+			if Input.is_action_pressed("ui_right"):
+				velocity.x = min(velocity.x + ACCELERATION, SPEED)
+			elif Input.is_action_pressed("ui_left"):
+				velocity.x = max(velocity.x - ACCELERATION, -SPEED)
+			else:
+				velocity.x = 0
+			if Input.is_action_pressed("ui_down"):
+				velocity.y = min(velocity.y + ACCELERATION, SPEED)
+			elif Input.is_action_pressed("ui_up"):
+				velocity.y = max(velocity.y - ACCELERATION, -SPEED)
+			else:
+				velocity.y = 0
+			rset("slave_velocity", velocity)
+			rset("slave_position", position)
 		else:
-			velocity.x = 0
-		if Input.is_action_pressed("ui_down"):
-			velocity.y = min(velocity.y + ACCELERATION, SPEED)
-		elif Input.is_action_pressed("ui_up"):
-			velocity.y = max(velocity.y - ACCELERATION, -SPEED)
-		else:
-			velocity.y = 0
+			velocity = slave_velocity
+			if abs(position.x - slave_position.x) > 20 or abs(position.y - slave_position.y) > 20:
+				position = slave_position
 
 #DAMAGE
 	if not target.empty():
 		for targ in target:
-			targ._damage(0.2)
+			targ._damage(0.4)
+			get_node("/root/main/ray/KinematicBody2D").sp += 0.2
 
 func _on_StartTimer_timeout():
 	rot = 0.4

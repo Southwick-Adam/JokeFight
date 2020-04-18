@@ -101,9 +101,8 @@ func _beer_toss(num):
 
 #WEAPON DAMAGING OTHERS
 func _harm(body):
-	var rng = randf()
-	body._damage(5 + (3 * rng))
-	$KinematicBody2D.sp += 2 + (2 * rng)
+	body._damage(7)
+	$KinematicBody2D.sp += 4
 
 func _on_DeathTimer_timeout():
 	$KinematicBody2D/Sprite/body.texture = preload("res://assets/players/adam/chef.png")

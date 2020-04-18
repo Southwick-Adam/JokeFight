@@ -88,9 +88,8 @@ func _shoot():
 
 #WEAPON DAMAGING OTHERS
 func _harm(body):
-	var rng = randf()
-	body._damage(3 + (3 * rng))
-	$KinematicBody2D.sp += 2 + (2 * rng)
+	body._damage(5)
+	$KinematicBody2D.sp += 2.5
 
 func _on_DeathTimer_timeout():
 	_on_ReloadTimer_timeout()

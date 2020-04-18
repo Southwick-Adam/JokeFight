@@ -7,7 +7,7 @@ var damage_num = 0
 var can_shoot = true
 var smash_out = false
 var rush = false
-var list_anims = ["attack","stab","rush"]
+var list_anims = ["attack","stab","rush", "die"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -71,7 +71,7 @@ func _process(delta):
 	elif $AnimationPlayer2.current_animation == ("stab"):
 		damage_num = 9
 	elif $AnimationPlayer2.current_animation == ("rush"):
-		damage_num = 2
+		damage_num = 4
 #RUSH
 	if rush:
 		position.x += 600 * delta * $KinematicBody2D/Sprite.scale.x
@@ -81,13 +81,13 @@ func _animate2(anim):
 		$AnimationPlayer2.play(anim)
 
 func _harm(body):
-	var rng = randf()
-	body._damage(damage_num + (2 * rng))
+	body._damage(damage_num)
 	$KinematicBody2D.sp += damage_num/2
 
 func _shoot():
 	var node = Smash.instance()
 	get_node("/root/main").call_deferred("add_child", node)
+	node.set_network_master(get_network_master())
 	node.position = $KinematicBody2D/Sprite/gun.global_position
 	$KinematicBody2D/Sprite/gun/dot.hide()
 

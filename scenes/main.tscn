@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=2]
+[gd_scene load_steps=14 format=2]
 
 [ext_resource path="res://scenes/terrain.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scripts/main.gd" type="Script" id=2]
@@ -9,6 +9,8 @@
 [ext_resource path="res://scenes/spawner.tscn" type="PackedScene" id=7]
 [ext_resource path="res://assets/pixel.png" type="Texture" id=8]
 [ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=9]
+[ext_resource path="res://scenes/hollis.tscn" type="PackedScene" id=10]
+[ext_resource path="res://scenes/charlotte.tscn" type="PackedScene" id=11]
 
 [sub_resource type="Animation" id=1]
 resource_name = "shake"
@@ -63,7 +65,9 @@ script = ExtResource( 2 )
 Sean = ExtResource( 4 )
 Adam = ExtResource( 5 )
 Ray = ExtResource( 3 )
+Hollis = ExtResource( 10 )
 Andy = ExtResource( 6 )
+Charlotte = ExtResource( 11 )
 
 [node name="terrain" parent="." instance=ExtResource( 1 )]
 position = Vector2( -3.01468, 33.1614 )

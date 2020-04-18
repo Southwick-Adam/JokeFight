@@ -55,14 +55,15 @@ func _process(_delta):
 #BEAM
 	if not beam_target.empty():
 		for targ in beam_target:
-			targ._damage(0.2)
+			targ._damage(0.4)
+			$KinematicBody2D.sp += 0.2
 #ANIMATE GUN
 	if $KinematicBody2D.gun_mode == true and ult == false:
 		$AnimationPlayer2.play("gun")
 
 func _harm(body):
-	var rng = randf()
-	body._damage(4 + (3 * rng))
+	body._damage(5 + boomstate)
+	$KinematicBody2D.sp += 4
 
 func _on_beam_body_entered(body):
 	if body.is_in_group("player"):
@@ -91,15 +92,15 @@ func _boom_state(state):
 	if state == 1:
 		sprite.texture = preload("res://assets/players/sean/boom.png")
 		sprite.position = Vector2(26,-7)
-		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(25,6)
+		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(1,1)
 	elif state == 2:
 		sprite.texture = preload("res://assets/players/sean/boom2.png")
 		sprite.position = Vector2(33,-18)
-		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(38,8.33)
+		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(1.52,1.39)
 	elif state == 3:
 		sprite.texture = preload("res://assets/players/sean/boom3.png")
 		sprite.position = Vector2(32,-28)
-		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(58,9)
+		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(2.32,1.5)
 
 func _on_BoomTimer_timeout():
 	boomstate -= 1

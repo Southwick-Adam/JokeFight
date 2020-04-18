@@ -33,7 +33,7 @@ blend_mode = 1
 min_value = 0.2
 _data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.344828, 0.471402 ), -0.669031, -0.669031, 0, 0, Vector2( 0.396552, 0.274475 ), 0.0, 0.0, 0, 0 ]
 
-[sub_resource type="RectangleShape2D" id=8]
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 20, 42 )
 
 [sub_resource type="DynamicFont" id=5]
@@ -337,15 +337,15 @@ position = Vector2( -0.460909, -41.2865 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 1.2605, -6.96839 )
-shape = SubResource( 8 )
+shape = SubResource( 4 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
-margin_left = -8.15644
-margin_top = -70.9612
-margin_right = 31.8436
-margin_bottom = -47.9612
+margin_left = -101.071
+margin_top = -75.234
+margin_right = 98.9295
+margin_bottom = -52.234
 custom_fonts/font = SubResource( 5 )
-text = "P1"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -378,5 +378,5 @@ one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]

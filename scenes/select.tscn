@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=17 format=2]
 
 [ext_resource path="res://assets/pixel.png" type="Texture" id=1]
 [ext_resource path="res://assets/players/ray/ray.png" type="Texture" id=2]
@@ -9,6 +9,10 @@
 [ext_resource path="res://scripts/select.gd" type="Script" id=7]
 [ext_resource path="res://scenes/slector.tscn" type="PackedScene" id=8]
 [ext_resource path="res://scenes/main.tscn" type="PackedScene" id=9]
+[ext_resource path="res://assets/players/hollis/hair.png" type="Texture" id=10]
+[ext_resource path="res://assets/players/hollis/head.png" type="Texture" id=11]
+[ext_resource path="res://assets/players/hollis/hair_back.png" type="Texture" id=12]
+[ext_resource path="res://assets/players/charlotte/ex.png" type="Texture" id=13]
 
 [sub_resource type="DynamicFont" id=1]
 size = 30
@@ -129,8 +133,66 @@ self_modulate = Color( 0.168627, 0.168627, 0.168627, 0.882353 )
 scale = Vector2( 120, 120 )
 texture = ExtResource( 1 )
 
+[node name="hollis" type="Position2D" parent="."]
+position = Vector2( 398, 482.5 )
+
+[node name="Label" type="Label" parent="hollis"]
+margin_left = -41.1754
+margin_top = 59.7379
+margin_right = 41.8246
+margin_bottom = 96.7379
+custom_fonts/font = SubResource( 1 )
+text = "HOLLIS"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Sprite" parent="hollis"]
+self_modulate = Color( 0.196078, 0.607843, 0.607843, 1 )
+show_behind_parent = true
+scale = Vector2( 120, 120 )
+z_index = -3
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="hollis/back"]
+self_modulate = Color( 0.301961, 0.301961, 0.301961, 1 )
+position = Vector2( 0, 0.575756 )
+scale = Vector2( 1, 0.163463 )
+z_index = 3
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="hollis/back"]
+self_modulate = Color( 0.196078, 0.607843, 0.607843, 1 )
+position = Vector2( 0, 0.466441 )
+scale = Vector2( 1, 0.0671176 )
+z_index = 3
+texture = ExtResource( 1 )
+
+[node name="head" type="Sprite" parent="hollis"]
+position = Vector2( 1.27454, -13.383 )
+scale = Vector2( 1.8, 1.8 )
+z_index = -1
+texture = ExtResource( 11 )
+
+[node name="Sprite" type="Sprite" parent="hollis/head"]
+position = Vector2( -1.8, 16.31 )
+scale = Vector2( 0.9, 1 )
+texture = ExtResource( 10 )
+
+[node name="Sprite" type="Sprite" parent="hollis/head/Sprite"]
+show_behind_parent = true
+z_index = -1
+texture = ExtResource( 12 )
+
+[node name="lock" type="Sprite" parent="hollis"]
+visible = false
+self_modulate = Color( 0.168627, 0.168627, 0.168627, 0.882353 )
+scale = Vector2( 120, 120 )
+texture = ExtResource( 1 )
+
 [node name="andy" type="Position2D" parent="."]
-position = Vector2( 998.708, 300 )
+position = Vector2( 598.708, 482.5 )
 
 [node name="Label" type="Label" parent="andy"]
 margin_left = -41.1754
@@ -161,11 +223,59 @@ self_modulate = Color( 0.168627, 0.168627, 0.168627, 0.882353 )
 scale = Vector2( 120, 120 )
 texture = ExtResource( 1 )
 
+[node name="charlotte" type="Position2D" parent="."]
+position = Vector2( 798.708, 482.5 )
+
+[node name="Label" type="Label" parent="charlotte"]
+margin_left = -75.7665
+margin_top = 58.0908
+margin_right = 86.2335
+margin_bottom = 95.0908
+custom_fonts/font = SubResource( 1 )
+text = "CHARLOTTE"
+align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="back" type="Sprite" parent="charlotte"]
+self_modulate = Color( 0.47451, 0.317647, 0.490196, 1 )
+show_behind_parent = true
+scale = Vector2( 120, 120 )
+z_index = -3
+texture = ExtResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="charlotte/back"]
+self_modulate = Color( 0.301961, 0.301961, 0.301961, 1 )
+position = Vector2( 0, 0.575756 )
+scale = Vector2( 1, 0.163463 )
+z_index = 3
+texture = ExtResource( 1 )
+
+[node name="Sprite2" type="Sprite" parent="charlotte/back"]
+self_modulate = Color( 0.47451, 0.317647, 0.490196, 1 )
+position = Vector2( 0, 0.466441 )
+scale = Vector2( 1, 0.0671176 )
+z_index = 3
+texture = ExtResource( 1 )
+
+[node name="head" type="Sprite" parent="charlotte"]
+position = Vector2( 1.27454, 9.67776 )
+scale = Vector2( 1.8, 1.8 )
+z_index = -1
+texture = ExtResource( 13 )
+
+[node name="lock" type="Sprite" parent="charlotte"]
+visible = false
+self_modulate = Color( 0.168627, 0.168627, 0.168627, 0.882353 )
+scale = Vector2( 120, 120 )
+texture = ExtResource( 1 )
+
 [node name="title" type="Label" parent="."]
-margin_left = 423.582
-margin_top = 89.0625
-margin_right = 987.582
-margin_bottom = 144.063
+margin_left = 428.524
+margin_top = 51.177
+margin_right = 992.524
+margin_bottom = 106.177
 custom_fonts/font = SubResource( 2 )
 text = "CHOOSE YOUR CHARACTER"
 __meta__ = {
@@ -173,10 +283,10 @@ __meta__ = {
 }
 
 [node name="title2" type="Label" parent="."]
-margin_left = 166.172
-margin_top = 436.305
-margin_right = 730.173
-margin_bottom = 491.305
+margin_left = 169.466
+margin_top = 146.398
+margin_right = 733.467
+margin_bottom = 201.398
 custom_fonts/font = SubResource( 3 )
 text = "Z - SELECT"
 align = 1
@@ -185,10 +295,10 @@ __meta__ = {
 }
 
 [node name="title3" type="Label" parent="."]
-margin_left = 394.97
-margin_top = 436.305
-margin_right = 958.968
-margin_bottom = 491.305
+margin_left = 398.264
+margin_top = 146.398
+margin_right = 962.262
+margin_bottom = 201.398
 custom_fonts/font = SubResource( 3 )
 text = " X - DESELECT"
 align = 1
@@ -197,10 +307,10 @@ __meta__ = {
 }
 
 [node name="title4" type="Label" parent="."]
-margin_left = 649.714
-margin_top = 436.306
-margin_right = 1213.72
-margin_bottom = 491.306
+margin_left = 653.008
+margin_top = 146.399
+margin_right = 1217.01
+margin_bottom = 201.399
 custom_fonts/font = SubResource( 3 )
 text = " ENTER - START"
 align = 1
@@ -209,13 +319,24 @@ __meta__ = {
 }
 
 [node name="title5" type="Label" parent="."]
-margin_left = 244.011
-margin_top = 530.655
-margin_right = 808.012
-margin_bottom = 585.655
+margin_left = 691.261
+margin_top = 369.568
+margin_right = 1255.26
+margin_bottom = 424.568
 custom_fonts/font = SubResource( 3 )
 text = "LIVES:"
 align = 1
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="SpinBox" type="SpinBox" parent="."]
+margin_left = 1032.25
+margin_top = 370.043
+margin_right = 1110.25
+margin_bottom = 411.043
+min_value = 1.0
+value = 5.0
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -239,15 +360,4 @@ __meta__ = {
 [node name="Label" type="Label" parent="V"]
 margin_right = 40.0
 margin_bottom = 14.0
-
-[node name="SpinBox" type="SpinBox" parent="."]
-margin_left = 585.0
-margin_top = 531.13
-margin_right = 663.0
-margin_bottom = 572.13
-min_value = 1.0
-value = 5.0
-__meta__ = {
-"_edit_use_anchors_": false
-}
 [connection signal="value_changed" from="SpinBox" to="." method="_on_SpinBox_value_changed"]

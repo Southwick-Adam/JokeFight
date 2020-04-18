@@ -24,10 +24,10 @@
 [ext_resource path="res://animations/die.tres" type="Animation" id=22]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 23.9756, 4.63228 )
+extents = Vector2( 35.302, 10.4321 )
 
 [sub_resource type="RectangleShape2D" id=2]
-extents = Vector2( 20, 42 )
+extents = Vector2( 20, 39.5306 )
 
 [sub_resource type="DynamicFont" id=3]
 size = 18
@@ -381,12 +381,12 @@ position = Vector2( 1.2605, -8.0841 )
 shape = SubResource( 2 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
-margin_left = -8.15644
-margin_top = -70.9612
-margin_right = 31.8436
-margin_bottom = -47.9612
+margin_left = -101.318
+margin_top = -73.7505
+margin_right = 98.6824
+margin_bottom = -50.7505
 custom_fonts/font = SubResource( 3 )
-text = "P1"
+align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
@@ -406,7 +406,7 @@ anims/stab = ExtResource( 14 )
 anims/ult = SubResource( 6 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 2.5
+wait_time = 3.0
 one_shot = true
 
 [node name="UltTimer" type="Timer" parent="."]
