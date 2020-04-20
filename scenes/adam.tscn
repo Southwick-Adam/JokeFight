@@ -277,11 +277,12 @@ Bars = ExtResource( 11 )
 [node name="Sprite" type="Sprite" parent="KinematicBody2D"]
 
 [node name="body" type="Sprite" parent="KinematicBody2D/Sprite"]
-position = Vector2( 0.464579, 4.8883 )
+position = Vector2( 0.978063, 6.01306 )
 texture = ExtResource( 1 )
 
 [node name="head" type="Sprite" parent="KinematicBody2D/Sprite"]
-position = Vector2( -0.412223, -24.6726 )
+position = Vector2( -1.1767, -24.883 )
+rotation = -0.15708
 z_index = 1
 texture = ExtResource( 5 )
 
@@ -291,14 +292,14 @@ texture = ExtResource( 21 )
 
 [node name="handL" type="Sprite" parent="KinematicBody2D/Sprite"]
 modulate = Color( 0.956863, 0.858824, 0.670588, 1 )
-position = Vector2( -18.7074, 9.20673 )
+position = Vector2( -19.9931, 14.5308 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 2
 texture = ExtResource( 4 )
 
 [node name="handR" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.956863, 0.858824, 0.670588, 1 )
-position = Vector2( 21.3266, 9.69692 )
+position = Vector2( 22.0325, 15.8176 )
 scale = Vector2( 0.5, 0.5 )
 z_index = -3
 texture = ExtResource( 4 )
@@ -324,14 +325,14 @@ shape = SubResource( 1 )
 
 [node name="legL" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.184314, 0.184314, 0.184314, 1 )
-position = Vector2( -8.19322, 23.9495 )
+position = Vector2( -8.19322, 25.5428 )
 rotation = 0.0724322
 z_index = -1
 texture = ExtResource( 6 )
 
 [node name="legR" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.184314, 0.184314, 0.184314, 1 )
-position = Vector2( 7.0291, 24.3478 )
+position = Vector2( 7.0291, 25.9411 )
 rotation = -0.113724
 z_index = -2
 texture = ExtResource( 6 )
@@ -419,5 +420,5 @@ one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]

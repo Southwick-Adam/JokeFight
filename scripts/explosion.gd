@@ -10,6 +10,6 @@ func _on_Timer_timeout():
 
 func _on_Area2D_body_entered(body):
 	if body.is_in_group("player"):
-		if not (get_node("/root/main/adam/Kinematic2D").gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
+		if not (get_node("/root/main/adam/KinematicBody2D").gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
 			body._damage(14)
 			get_node("/root/main/adam/KinematicBody2D").sp += 6

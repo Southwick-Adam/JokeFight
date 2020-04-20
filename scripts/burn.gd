@@ -13,6 +13,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
 	get_parent()._damage(.1)
+	if get_parent().health <= 0:
+		queue_free()
 
 func _on_Timer_timeout():
 	queue_free()

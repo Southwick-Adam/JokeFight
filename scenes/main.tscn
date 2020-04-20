@@ -78,10 +78,10 @@ position = Vector2( -3.01468, 33.1614 )
 position = Vector2( 995, 0 )
 
 [node name="bar3" type="Position2D" parent="."]
-position = Vector2( 0, 615 )
+position = Vector2( 0, 580 )
 
 [node name="bar4" type="Position2D" parent="."]
-position = Vector2( 995, 615 )
+position = Vector2( 995, 580 )
 
 [node name="spawn1" type="Position2D" parent="."]
 position = Vector2( 253.426, 217.805 )

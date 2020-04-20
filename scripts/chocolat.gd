@@ -19,8 +19,9 @@ func _process(delta):
 func _on_Area2D_body_entered(body):
 	if body != get_node("/root/main/charlotte/KinematicBody2D"):
 		if body.is_in_group("player"):
-			if not (get_node("/root/main/charlotte/Kinematic2D").gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
-				if body.get_node("smudge") != null:
+			if not (get_node("/root/main/charlotte/KinematicBody2D").gay == true and body == get_node("/root/main/hollis/KinematicBody2D")):
+				if body.smudge == false:
+					body.smudge = true
 					var node = Smudge.instance()
 					body.add_child(node)
 					node.position = body.global_position

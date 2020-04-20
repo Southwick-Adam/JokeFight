@@ -13,5 +13,6 @@ func _on_Timer_timeout():
 		num -= 1
 		$Sprite.frame -= 1
 	else:
+		get_parent().smudge = false
 		queue_free()
 	

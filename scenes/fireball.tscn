@@ -91,6 +91,7 @@ Burn = ExtResource( 4 )
 [node name="explosion" type="Sprite" parent="Area2D"]
 visible = false
 scale = Vector2( 0.8, 0.8 )
+z_index = 4
 texture = ExtResource( 2 )
 vframes = 4
 hframes = 3

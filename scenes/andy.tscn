@@ -144,6 +144,7 @@ texture = ExtResource( 10 )
 show_behind_parent = true
 position = Vector2( -38.1904, -22.7409 )
 scale = Vector2( 2.22222, 2.22222 )
+monitoring = false
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/handR/weapon"]
 self_modulate = Color( 0, 0, 0, 1 )

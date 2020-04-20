@@ -19,6 +19,7 @@ var backsteps = 2
 var lives
 var attack_num = 0
 var gay = false
+var smudge = false
 
 onready var hurt_timer = 0.1
 onready var pos_update_timer = 0.5
@@ -56,11 +57,13 @@ func _process(delta):
 		hurt_timer -= delta
 	if hurt_timer <= 0 and health > 0:
 		modulate = Color(1,1,1)
-	if gay_timer >= 0:
+	if gay_timer >= 0 and gay:
 		gay_timer -= delta
 	else:
 		gay = false
-		get_node("gay").queue_free()
+		for child in get_children():
+			if child.name == ("gay"):
+				child.queue_free()
 #GRAVITY
 	velocity.y += GRAVITY
 #RIGHT/LEFT MOVEMENT
@@ -79,13 +82,13 @@ func _process(delta):
 		rset("slave_health", health)
 		rset("slave_sp", sp)
 	else:
+		health = slave_health
 		velocity.x = slave_velocity.x
 		if pos_update_timer >= 0:
 			pos_update_timer -= delta
 		else:
 			if abs(position.x - slave_position.x) > 10 or abs(position.y - slave_position.y) > 10:
 				position = slave_position
-				health = slave_health
 				sp = slave_sp
 			pos_update_timer = 0.5
 #VELOCITY PROCESSING

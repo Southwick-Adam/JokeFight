@@ -68,7 +68,7 @@ func _sp_mini():
 	$ReloadTimer.start()
 	$KinematicBody2D/Sprite/gun.frame = 6
 	$KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a = 1
-	$KinematicBody2D.health += clip * 4
+	$KinematicBody2D.health += clip * 7
 
 func _shoot():
 	$AnimationPlayer2.play("fire")

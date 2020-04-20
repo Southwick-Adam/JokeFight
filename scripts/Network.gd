@@ -9,7 +9,7 @@ signal player_disconnect
 
 var server_info = {
 	name = "Server",
-	max_players = 8,
+	max_players = 4,
 	used_port = 8088
 }
 

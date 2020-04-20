@@ -14,14 +14,21 @@ var first = true
 func _ready():
 	Network.connect("player_list_changed", self, "_on_player_list_changed")
 	# Update the lblLocalPlayer label widget to display the local player name
-	$V/Label.text = (str(Gamestate.player_info.name) + " - Spectating")
+	$V/Label.text = (str(Gamestate.player_info.name) + " - Choose")
 	_spawn()
 
 func _input(event):
 	#START GAME
-	if event.is_action_pressed("ui_accept") and Gamestate.player_info.character != null:
-		rpc("_start_game")
-		_start_game()
+	if event.is_action_pressed("ui_accept"):
+		var n = 0
+		while n < (Network.players.size()):
+			var targ = Network.players.keys()[n]
+			if Network.players[targ].character == null:
+					break
+			if n == Network.players.size() - 1:
+				rpc("_start_game")
+				_start_game()
+			n += 1
 	if Gamestate.player_info.character == null:
 		if event.is_action_pressed("ui_left"):
 			if choice > 0:

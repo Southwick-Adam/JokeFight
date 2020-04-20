@@ -26,7 +26,7 @@ func _on_Timer_timeout():
 func _on_AnimationPlayer_animation_finished(anim_name):
 	if end:
 		for target in targets:
-			target.set_process_input(false)
+			target.set_process_input(true)
 			target.SPEED = 400
 		queue_free()
 	else:
