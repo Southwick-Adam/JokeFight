@@ -26,16 +26,17 @@ script = ExtResource( 4 )
 
 [node name="Area2D" type="Area2D" parent="."]
 position = Vector2( 0, 1082.08 )
+monitoring = false
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
-position = Vector2( 0, -682.052 )
+position = Vector2( 0, -314.866 )
 scale = Vector2( 1.7, 1.7 )
 texture = ExtResource( 1 )
 offset = Vector2( -4.68007, 185.215 )
 
 [node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="Area2D"]
 visible = false
-position = Vector2( -8.24213, -357.155 )
+position = Vector2( -5.49475, 10.9894 )
 polygon = PoolVector2Array( 211.047, 340.255, 103.607, 148.398, 61.3982, 17.9352, 26.8639, -181.596, 15.3525, -369.617, -11.5076, -170.085, -46.0419, 29.4467, -103.599, 152.235, -199.528, 332.581, -80.5762, 347.93 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]

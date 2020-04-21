@@ -46,7 +46,7 @@ func _on_UltTimer_timeout():
 	$KinematicBody2D/Sprite/head/eyes.hide()
 	$KinematicBody2D.set_process_input(true)
 	$KinematicBody2D.SPEED = 400
-	$KinematicBody2D.GRAVITY = 50
+	$KinematicBody2D.GRAVITY = 3000
 	$KinematicBody2D/Sprite/head/eyes.hide()
 	if $KinematicBody2D.gun_mode:
 		$KinematicBody2D/Sprite/gun.show()

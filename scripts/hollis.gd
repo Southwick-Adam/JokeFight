@@ -29,22 +29,29 @@ remotesync func _input_effect(event):
 		$KinematicBody2D/Sprite/head/gun/beam.monitoring = true
 		$ReloadTimer.paused = false
 	elif event == ("release"):
+		sing_target.clear()
 		$KinematicBody2D/Sprite/head/gun.hide()
 		$KinematicBody2D/Sprite/head/gun/beam.monitoring = false
 		$ReloadTimer.paused = true
 
-func _process(_delta):
-	$KinematicBody2D/Sprite/head/gun/beam/Sprite.rotate(0.06)
-	$KinematicBody2D/Sprite/head/gun/beam/Sprite2.rotate(-0.04)
+func _process(delta):
+	$KinematicBody2D/Sprite/head/gun/beam/Sprite.rotate(3.6 * delta)
+	$KinematicBody2D/Sprite/head/gun/beam/Sprite2.rotate(-2.4 * delta)
 	if can_shoot == false:
 		$ReloadTimer.paused = false
 	else:
-		$KinematicBody2D/Sprite/head/gun/mouth.scale.y = $ReloadTimer.time_left/3
+		$KinematicBody2D/Sprite/head/gun/mouth.scale.y = 0.4 + ($ReloadTimer.time_left * .2)
+		$KinematicBody2D/Sprite/head/gun/mouth.scale.x = 0.7 + ($ReloadTimer.time_left * .1)
 #BEAM
 	if not sing_target.empty():
 		for targ in sing_target:
-			targ._damage(0.4)
-			$KinematicBody2D.sp += 0.2
+			targ._damage(20 * delta)
+			$KinematicBody2D.sp += (10 * delta)
+			if targ.health <= 0:
+				sing_target.erase(targ)
+#NOTE
+	if $KinematicBody2D/note.modulate.a > 0:
+		$KinematicBody2D/note.modulate.a -= (3 * delta)
 
 func _harm(body):
 	if flag_hits > 0:
@@ -62,7 +69,8 @@ func _harm(body):
 
 func _on_beam_body_entered(body):
 	if body.is_in_group("player") and body != get_node("/root/main/hollis/KinematicBody2D"):
-		sing_target.append(body)
+		if not sing_target.has(body):
+			sing_target.append(body)
 
 func _on_beam_body_exited(body):
 	if sing_target.has(body):
@@ -70,6 +78,7 @@ func _on_beam_body_exited(body):
 
 func _on_ReloadTimer_timeout():
 	if can_shoot:
+		sing_target.clear()
 		$KinematicBody2D/Sprite/head/gun.hide()
 		$KinematicBody2D/Sprite/head/gun/beam.monitoring = false
 		can_shoot = false
@@ -77,6 +86,7 @@ func _on_ReloadTimer_timeout():
 		$ReloadTimer.start()
 	else:
 		can_shoot = true
+		$KinematicBody2D/note.modulate.a = 1
 		$ReloadTimer.wait_time = 3
 		$ReloadTimer.start()
 
@@ -96,7 +106,7 @@ func _ult():
 
 func _sp_mini():
 	$KinematicBody2D/Sprite/handR/weapon/Sprite.texture = preload("res://assets/players/hollis/flag.png")
-	flag_hits = 4
+	flag_hits = 3
 
 func _on_UltTimer_timeout():
 	_end_ult()
@@ -116,10 +126,9 @@ func _end_ult():
 func _on_DeathTimer_timeout():
 	_on_ReloadTimer_timeout()
 
-
 func _on_AnimationPlayer2_animation_finished(anim_name):
 	print(flag_hits)
-	if anim_name == ("attck") or anim_name == ("stab"):
+	if anim_name == ("attack") or anim_name == ("stab"):
 		if flag_hits > 1:
 			flag_hits -= 1
 		else:

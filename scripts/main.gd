@@ -44,9 +44,10 @@ func _set_lives(value):
 	lives = value
 
 func _on_Button_pressed():
+	print("end")
 	var node = load("res://scenes/select.tscn").instance()
 	get_tree().get_root().add_child(node)
-	node.get_child(node.get_child_count() - 2).value = lives
+	node.get_child(node.get_child_count() - 4).value = lives
 	Gamestate.player_info.character = null
 	queue_free()
 	

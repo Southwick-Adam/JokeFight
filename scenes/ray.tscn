@@ -550,5 +550,5 @@ one_shot = true
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="RushTimer" to="." method="_on_RushTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

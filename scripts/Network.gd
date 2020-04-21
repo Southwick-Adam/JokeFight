@@ -33,7 +33,6 @@ func _create_server():
 	emit_signal("server_created")
 	register_player(Gamestate.player_info)
 
-# Everyone gets notified whenever a new client joins the server
 func _on_player_connected(id):
 	emit_signal("join_success")
 	# Update the player_info dictionary with the obtained unique network ID
@@ -43,14 +42,10 @@ func _on_player_connected(id):
 	# And register itself on the local list
 	register_player(Gamestate.player_info)
 
-# Everyone gets notified whenever someone disconnects from the server
 func _on_player_disconnected(id):
 	print("Player ", players[id].name, " disconnected from server")
-	# Update the player tables
 	if (get_tree().is_network_server()):
-		# Unregister the player from the server's list
 		unregister_player(id)
-		# Then on all remaining peers
 		rpc("unregister_player", id)
 
 remote func register_player(pinfo):
@@ -87,11 +82,12 @@ remote func unregister_player(id):
 			if child.name == players[id].character:
 				get_node("/root/main")._player_died()
 				child.queue_free()
+	elif get_node("/root/select") != null:
+		for child in get_node("/root/select").get_children():
+			if child.name == players[id].character:
+				child.get_node("lock").hide()
 	emit_signal("player_disconnect", id)
-	
-	# Remove the player from the list
 	players.erase(id)
-	# And notify the list has been changed
 	emit_signal("player_list_changed")
 
 #CLIENT SIDE FUNCTIONS-------------------------------------@

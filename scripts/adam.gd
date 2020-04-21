@@ -56,7 +56,7 @@ func _on_UltTimer_timeout():
 	for opponent in get_tree().get_nodes_in_group("player"):
 		opponent.set_process_input(true)
 		opponent.SPEED = 400
-		opponent.GRAVITY = 50
+		opponent.GRAVITY = 3000
 	if $KinematicBody2D.gun_mode:
 		$KinematicBody2D/Sprite/gun.show()
 	else:

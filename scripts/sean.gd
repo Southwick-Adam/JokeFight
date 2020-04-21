@@ -47,7 +47,7 @@ remotesync func _input_effect(event):
 		node.global_position = Vector2(get_node("/root/main/sean_ult/bar").global_position.x, 690)
 		ult_shots -= 1
 
-func _process(_delta):
+func _process(delta):
 	if can_shoot == false:
 		$ReloadTimer.paused = false
 	else:
@@ -56,8 +56,8 @@ func _process(_delta):
 	if not beam_target.empty():
 		for targ in beam_target:
 			if not ($KinematicBody2D.gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
-				targ._damage(0.4)
-				$KinematicBody2D.sp += 0.2
+				targ._damage(20 * delta)
+				$KinematicBody2D.sp += (10 * delta)
 #ANIMATE GUN
 	if $KinematicBody2D.gun_mode == true and ult == false:
 		$AnimationPlayer2.play("gun")

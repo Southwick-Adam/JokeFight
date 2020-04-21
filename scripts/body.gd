@@ -3,7 +3,7 @@ extends KinematicBody2D
 export (PackedScene) var Bars
 
 const UP = Vector2(0,-1)
-var GRAVITY = 50
+var GRAVITY = 3000
 var SPEED = 400
 const ACCELERATION = 70
 const JUMP = -1000
@@ -65,7 +65,7 @@ func _process(delta):
 			if child.name == ("gay"):
 				child.queue_free()
 #GRAVITY
-	velocity.y += GRAVITY
+	velocity.y += GRAVITY * delta
 #RIGHT/LEFT MOVEMENT
 	if is_network_master():
 		if Input.is_action_pressed("ui_right"):
@@ -90,7 +90,7 @@ func _process(delta):
 			if abs(position.x - slave_position.x) > 10 or abs(position.y - slave_position.y) > 10:
 				position = slave_position
 				sp = slave_sp
-			pos_update_timer = 0.5
+			pos_update_timer = 0.2
 #VELOCITY PROCESSING
 	velocity = move_and_slide(velocity, UP)
 #ANIMATIONS
@@ -105,7 +105,6 @@ func _process(delta):
 			_animate("jump")
 		else:
 			_animate("fall")
-
 #SP
 	if sp > 100:
 		sp = 100

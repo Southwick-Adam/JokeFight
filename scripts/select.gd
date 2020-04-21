@@ -59,11 +59,13 @@ func _on_player_list_changed():
 			nlabel.text = (str(Network.players[p].name) + " - " + str(Network.players[p].character))
 		$V.add_child(nlabel)
 #PRE SELECT OTHER PLAYERS CHOICES
-	if first and Gamestate.player_info.net_id != 1:
+	if first and Gamestate.player_info.net_id != 1 and Network.players.size() > 1:
 		first = false
 		var n = 0
+		print(Network.players.size())
 		while n < (Network.players.size()):
 			var targ = Network.players.keys()[n]
+			print(Network.players[targ].character)
 			for child in get_children():
 				if child.name == Network.players[targ].character:
 					child.get_node("lock").show()
@@ -96,13 +98,16 @@ func _choose(choice):
 	Network.update_server()
 
 func _unchoose():
-	get_child(choice).get_node("lock").hide()
+	rpc("_unlock", choice)
 	_spawn()
 	Gamestate.player_info.character = null
 	Network.update_server()
 
 remotesync func _lock(num):
 	get_child(num).get_node("lock").show()
+
+remotesync func _unlock(num):
+	get_child(num).get_node("lock").hide()
 
 func _spawn():
 	selector = Selector.instance()

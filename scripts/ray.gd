@@ -131,6 +131,7 @@ func _on_AnimationPlayer2_animation_finished(anim_name):
 		get_node("/root/main/AnimationPlayer").play("shake")
 
 func _on_UltTimer_timeout():
+	ult = false
 	$KinematicBody2D/Sprite/ult.hide()
 	$KinematicBody2D/Sprite/head/eyes.hide()
 	$KinematicBody2D/Sprite/handL.show()
@@ -138,6 +139,7 @@ func _on_UltTimer_timeout():
 	if $KinematicBody2D.gun_mode:
 		$KinematicBody2D/Sprite/gun.show()
 	$KinematicBody2D.SPEED = 400
+	set_process_input(true)
 
 func _on_DeathTimer_timeout():
 	_on_ReloadTimer_timeout()

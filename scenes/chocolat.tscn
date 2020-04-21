@@ -8,6 +8,7 @@
 extents = Vector2( 4.64531, 5.55899 )
 
 [node name="chocolat" type="Node2D"]
+z_index = 1
 script = ExtResource( 2 )
 Smudge = ExtResource( 3 )
 

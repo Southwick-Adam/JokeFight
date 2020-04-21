@@ -31,6 +31,8 @@ func _on_join_fail():
 	pass
 
 func _on_btnSettings_pressed():
+	$settings/port.text = (str(USED_PORT))
+	$settings/IP.text = (str(USED_IP))
 	$settings.show()
 	$btnSettings.hide()
 
@@ -39,6 +41,7 @@ func _on_btnApply_pressed():
 	USED_PORT = int($settings/port.text)
 	Network.server_info.max_players = int($settings/maxConnects.value)
 	USED_IP = str($settings/IP.text)
+	Data._save_data(USED_PORT, USED_IP)
 
 func _on_JoinTimer_timeout():
 	$join_error.show()

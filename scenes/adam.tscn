@@ -420,5 +420,5 @@ one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

@@ -4,8 +4,7 @@ var SPEED = 600
 const ACCELERATION = 90
 
 var velocity = Vector2()
-var rot = 0
-var gravity = 50
+var gravity = 3000
 var target = []
 var started = false
 var slave_velocity = Vector2()
@@ -20,10 +19,12 @@ func _ready():
 func _process(delta):
 	if get_node("/root/main/ray") == null:
 		queue_free()
+	if get_node("/root/main/ray/KinematicBody2D").health <= 0:
+		queue_free()
 	position += velocity * delta
-	velocity.y += gravity
+	velocity.y += gravity * delta
 	if started:
-		$Area2D/Sprite.rotate(rot)
+		$Area2D/Sprite.rotate(20 * delta)
 		if is_network_master():
 			if Input.is_action_pressed("ui_right"):
 				velocity.x = min(velocity.x + ACCELERATION, SPEED)
@@ -41,18 +42,16 @@ func _process(delta):
 			rset("slave_position", position)
 		else:
 			velocity = slave_velocity
-			if abs(position.x - slave_position.x) > 20 or abs(position.y - slave_position.y) > 20:
+			if abs(position.x - slave_position.x) > 10 or abs(position.y - slave_position.y) > 10:
 				position = slave_position
-
 #DAMAGE
 	if not target.empty():
 		for targ in target:
-			if not (get_node("/root/main/ray/Kinematic2D").gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
+			if not (get_node("/root/main/ray/KinematicBody2D").gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
 				targ._damage(0.4)
 				get_node("/root/main/ray/KinematicBody2D").sp += 0.2
 
 func _on_StartTimer_timeout():
-	rot = 0.4
 	set_process_input(true)
 	$Area2D.monitoring = true
 	velocity = Vector2(0,0)

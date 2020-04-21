@@ -13,12 +13,12 @@ var sp_true = false
 func _ready():
 	$KinematicBody2D.req = true
 
-func _process(_delta):
+func _process(delta):
 	var not_gun_anims = ["ult", "fire"]
 	if $KinematicBody2D.gun_mode == true and not not_gun_anims.has($AnimationPlayer2.current_animation):
 		$AnimationPlayer2.play("gun")
 	if $KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a > 0:
-		$KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a -= 0.01
+		$KinematicBody2D/Sprite/head/choc_mouth.self_modulate.a -= 0.6 * delta
 
 func _input(event):
 	if is_network_master():
@@ -42,7 +42,7 @@ func _on_UltTimer_timeout():
 	$KinematicBody2D/Sprite/head/eyes.hide()
 	$KinematicBody2D.set_process_input(true)
 	$KinematicBody2D.SPEED = 400
-	$KinematicBody2D.GRAVITY = 50
+	$KinematicBody2D.GRAVITY = 3000
 	$KinematicBody2D/Sprite/head/eyes.hide()
 	if $KinematicBody2D.gun_mode:
 		$KinematicBody2D/Sprite/gun.show()

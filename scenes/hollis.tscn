@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=31 format=2]
 
 [ext_resource path="res://animations/jump.tres" type="Animation" id=1]
 [ext_resource path="res://animations/idle.tres" type="Animation" id=2]
@@ -20,23 +20,24 @@
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=18]
 [ext_resource path="res://animations/die.tres" type="Animation" id=19]
 [ext_resource path="res://assets/players/hollis/music.png" type="Texture" id=20]
+[ext_resource path="res://assets/players/hollis/note.png" type="Texture" id=21]
 
-[sub_resource type="CircleShape2D" id=9]
+[sub_resource type="CircleShape2D" id=1]
 radius = 146.956
 
-[sub_resource type="RectangleShape2D" id=1]
+[sub_resource type="RectangleShape2D" id=2]
 extents = Vector2( 30.5641, 7.7917 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="RectangleShape2D" id=3]
 extents = Vector2( 20, 39.5306 )
 
-[sub_resource type="DynamicFont" id=3]
+[sub_resource type="DynamicFont" id=4]
 size = 18
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 16 )
 
-[sub_resource type="Animation" id=7]
+[sub_resource type="Animation" id=5]
 resource_name = "attack"
 length = 0.6
 step = 0.05
@@ -89,7 +90,7 @@ tracks/3/keys = {
 "values": [ 25.0312 ]
 }
 
-[sub_resource type="Animation" id=4]
+[sub_resource type="Animation" id=6]
 length = 0.3
 step = 0.15
 tracks/0/type = "value"
@@ -141,7 +142,7 @@ tracks/3/keys = {
 "values": [ 0.0 ]
 }
 
-[sub_resource type="Animation" id=5]
+[sub_resource type="Animation" id=7]
 length = 0.1
 loop = true
 tracks/0/type = "value"
@@ -234,7 +235,7 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=6]
+[sub_resource type="Animation" id=9]
 length = 7.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("KinematicBody2D/Sprite/handL:position")
@@ -393,9 +394,11 @@ texture = ExtResource( 10 )
 
 [node name="gun" type="Sprite" parent="KinematicBody2D/Sprite/head"]
 visible = false
-position = Vector2( -2.16916, -2.18685 )
+self_modulate = Color( 0.972549, 0.894118, 0.819608, 1 )
+position = Vector2( 2.67718, 21.3268 )
 
 [node name="beam" type="Area2D" parent="KinematicBody2D/Sprite/head/gun"]
+position = Vector2( -8.56194, -26.6372 )
 monitoring = false
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/head/gun/beam"]
@@ -413,21 +416,28 @@ texture = ExtResource( 20 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/head/gun/beam"]
 visible = false
 position = Vector2( 4.51881, 24.4016 )
-shape = SubResource( 9 )
+shape = SubResource( 1 )
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/head/gun"]
+self_modulate = Color( 0.972549, 0.894118, 0.819608, 1 )
+position = Vector2( 0.166317, -0.582104 )
+scale = Vector2( 15, 5.33158 )
+texture = ExtResource( 14 )
 
 [node name="mouth" type="Sprite" parent="KinematicBody2D/Sprite/head/gun"]
-position = Vector2( 5.42825, 22.7233 )
+position = Vector2( 0.438782, -0.394583 )
 texture = ExtResource( 11 )
 offset = Vector2( -3.57249, -21.3315 )
 
 [node name="handL" type="Sprite" parent="KinematicBody2D/Sprite"]
-modulate = Color( 0.972549, 0.87451, 0.690196, 1 )
+modulate = Color( 0.972549, 0.894118, 0.819608, 1 )
 position = Vector2( -18.7074, 9.20673 )
 scale = Vector2( 0.5, 0.5 )
 z_index = 2
 texture = ExtResource( 17 )
 
 [node name="handR" type="Sprite" parent="KinematicBody2D/Sprite"]
+modulate = Color( 0.972549, 0.894118, 0.819608, 1 )
 self_modulate = Color( 0.972549, 0.87451, 0.690196, 1 )
 position = Vector2( 21.3266, 9.69692 )
 scale = Vector2( 0.5, 0.5 )
@@ -452,7 +462,7 @@ flip_v = true
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/handR/weapon"]
 position = Vector2( 35.3995, -15.3025 )
 rotation = -1.13229
-shape = SubResource( 1 )
+shape = SubResource( 2 )
 
 [node name="legL" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.105882, 0.105882, 0.105882, 1 )
@@ -477,18 +487,23 @@ texture = ExtResource( 14 )
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 visible = false
 position = Vector2( 0.819758, -4.55816 )
-shape = SubResource( 2 )
+shape = SubResource( 3 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
 margin_left = -101.318
 margin_top = -73.7505
 margin_right = 98.6824
 margin_bottom = -50.7505
-custom_fonts/font = SubResource( 3 )
+custom_fonts/font = SubResource( 4 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="note" type="Sprite" parent="KinematicBody2D"]
+modulate = Color( 0.752941, 0.752941, 0.752941, 0 )
+position = Vector2( 39.2505, -15.6337 )
+texture = ExtResource( 21 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/fall = ExtResource( 4 )
@@ -497,12 +512,12 @@ anims/jump = ExtResource( 1 )
 anims/run = ExtResource( 3 )
 
 [node name="AnimationPlayer2" type="AnimationPlayer" parent="."]
-anims/attack = SubResource( 7 )
+anims/attack = SubResource( 5 )
 anims/die = ExtResource( 19 )
-anims/fire = SubResource( 4 )
-anims/gun = SubResource( 5 )
+anims/fire = SubResource( 6 )
+anims/gun = SubResource( 7 )
 anims/stab = SubResource( 8 )
-anims/ult = SubResource( 6 )
+anims/ult = SubResource( 9 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -516,9 +531,10 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/head/gun/beam" to="." method="_on_beam_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Sprite/head/gun/beam" to="." method="_on_beam_body_exited"]
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
 [connection signal="animation_finished" from="AnimationPlayer2" to="." method="_on_AnimationPlayer2_animation_finished"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
