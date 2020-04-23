@@ -24,6 +24,7 @@ func _process(delta):
 	position += velocity * delta
 	velocity.y += gravity * delta
 	if started:
+		print(velocity)
 		$Area2D/Sprite.rotate(20 * delta)
 		if is_network_master():
 			if Input.is_action_pressed("ui_right"):
@@ -38,18 +39,19 @@ func _process(delta):
 				velocity.y = max(velocity.y - ACCELERATION, -SPEED)
 			else:
 				velocity.y = 0
-			rset("slave_velocity", velocity)
-			rset("slave_position", position)
-		else:
-			velocity = slave_velocity
-			if abs(position.x - slave_position.x) > 10 or abs(position.y - slave_position.y) > 10:
-				position = slave_position
+#			rset("slave_velocity", velocity)
+			rpc("_update", velocity, position)
 #DAMAGE
 	if not target.empty():
 		for targ in target:
 			if not (get_node("/root/main/ray/KinematicBody2D").gay == true and targ == get_node("/root/main/hollis/KinematicBody2D")):
 				targ._damage(0.4)
 				get_node("/root/main/ray/KinematicBody2D").sp += 0.2
+
+remote func _update(vel, pos):
+	velocity = vel
+	if abs(position.x - pos.x) > 10 or abs(position.y - pos.y) > 10:
+		position = pos
 
 func _on_StartTimer_timeout():
 	set_process_input(true)

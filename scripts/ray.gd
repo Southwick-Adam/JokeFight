@@ -9,10 +9,6 @@ var smash_out = false
 var rush = false
 var list_anims = ["attack","stab","rush", "die"]
 
-# Called when the node enters the scene tree for the first time.
-func _ready():
-	pass
-
 func _input(event):
 	if is_network_master():
 		var ev

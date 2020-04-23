@@ -18,6 +18,9 @@ func _on_Area2D_body_entered(body):
 			body._damage(6)
 			get_node("/root/main/andy/KinematicBody2D").sp += 3
 			if sp:
+				for child in body.get_children():
+					if child.name == ("burn"):
+						return
 				var node = Burn.instance()
 				body.add_child(node)
 				node.global_position = body.global_position

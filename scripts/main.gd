@@ -44,11 +44,13 @@ func _set_lives(value):
 	lives = value
 
 func _on_Button_pressed():
-	print("end")
 	var node = load("res://scenes/select.tscn").instance()
 	get_tree().get_root().add_child(node)
 	node.get_child(node.get_child_count() - 4).value = lives
-	Gamestate.player_info.character = null
+	var n = 0
+	while n < 6:
+		node.get_child(n).get_node("lock").hide()
+		n += 1
 	queue_free()
 	
 func _player_died():
@@ -67,6 +69,8 @@ func _player_died():
 				winner = Network.players[targ].name
 				break
 			n += 1
+		Gamestate.player_info.character = null
+		Network.update_server()
 		$win/Label.text = (str(winner) + " Wins \n Everybody Else Suck It!")
 		for child in $win.get_children():
 			child.show()

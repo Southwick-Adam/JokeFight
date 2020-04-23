@@ -365,5 +365,5 @@ one_shot = true
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="BoomTimer" to="." method="_on_BoomTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]
-[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]
 [connection signal="timeout" from="DeathTimer" to="KinematicBody2D" method="_on_DeathTimer_timeout"]
+[connection signal="timeout" from="DeathTimer" to="." method="_on_DeathTimer_timeout"]

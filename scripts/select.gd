@@ -70,6 +70,8 @@ func _on_player_list_changed():
 				if child.name == Network.players[targ].character:
 					child.get_node("lock").show()
 			n += 1
+	if (get_tree().is_network_server()):
+		rpc("life_change", $SpinBox.value)
 
 remote func _start_game():
 	var game = Game.instance()

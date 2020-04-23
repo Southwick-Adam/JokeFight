@@ -8,7 +8,7 @@ var can_shoot = true
 var boomstate = 1
 var ult = false
 onready var sp = $KinematicBody2D.sp
-onready var ult_shots = get_tree().get_nodes_in_group("player").size() - 1
+var ult_shots = 3
 var can_ult_shoot = false
 
 
@@ -136,7 +136,10 @@ func _on_UltTimer_timeout():
 
 func _end_ult():
 	ult = false
+	can_ult_shoot = false
 	$KinematicBody2D/Sprite/head/eyes.hide()
+	ult_shots = 3
+	$UltTimer.wait_time = 1
 	for opponent in get_tree().get_nodes_in_group("player"):
 		opponent.set_process_input(true)
 		opponent.SPEED = 400

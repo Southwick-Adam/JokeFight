@@ -6,6 +6,7 @@ onready var parent = get_parent().get_parent().get_parent()
 func _process(delta):
 	if parent.health <= 0:
 		parent.SPEED = 400
+		parent.smudge = false
 		queue_free()
 
 func _hit():

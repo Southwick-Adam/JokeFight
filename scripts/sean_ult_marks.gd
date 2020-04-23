@@ -22,7 +22,6 @@ func _on_Timer_timeout():
 		targ._damage(100)
 
 func _next():
-	print("next")
 	if target:
 		$AnimationPlayer.play("next")
 		get_node("/root/main/sean_ult")._delay()
