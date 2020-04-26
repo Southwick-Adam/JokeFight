@@ -1,0 +1,15 @@
+[remap]
+
+importer="ogg_vorbis"
+type="AudioStreamOGGVorbis"
+path="res://.import/song.ogg-283ae2068a7c23e7f2f67c985a69438f.oggstr"
+
+[deps]
+
+source_file="res://assets/players/andy/song.ogg"
+dest_files=[ "res://.import/song.ogg-283ae2068a7c23e7f2f67c985a69438f.oggstr" ]
+
+[params]
+
+loop=true
+loop_offset=0

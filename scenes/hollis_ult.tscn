@@ -1,0 +1,26 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://assets/players/hollis/gumly.ogv" type="VideoStream" id=1]
+[ext_resource path="res://scripts/hollis_ult.gd" type="Script" id=2]
+[ext_resource path="res://scenes/eye_bleed.tscn" type="PackedScene" id=3]
+
+[node name="hollis_ult" type="Node2D"]
+z_index = -5
+script = ExtResource( 2 )
+Bleed = ExtResource( 3 )
+
+[node name="VideoPlayer" type="VideoPlayer" parent="."]
+margin_left = 242.282
+margin_top = 49.1586
+margin_right = 964.282
+margin_bottom = 519.159
+stream = ExtResource( 1 )
+autoplay = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+autostart = true
+[connection signal="timeout" from="Timer" to="." method="_on_Timer_timeout"]

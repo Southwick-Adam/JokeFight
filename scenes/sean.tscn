@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=2]
+[gd_scene load_steps=34 format=2]
 
 [ext_resource path="res://animations/stab.tres" type="Animation" id=1]
 [ext_resource path="res://animations/attack.tres" type="Animation" id=2]
@@ -16,7 +16,7 @@
 [ext_resource path="res://scripts/sean.gd" type="Script" id=14]
 [ext_resource path="res://scenes/bars.tscn" type="PackedScene" id=15]
 [ext_resource path="res://animations/gun_sean.tres" type="Animation" id=16]
-[ext_resource path="res://assets/players/sean/boom.png" type="Texture" id=17]
+[ext_resource path="res://assets/players/sean/boom3.png" type="Texture" id=17]
 [ext_resource path="res://assets/players/sean/dot.png" type="Texture" id=18]
 [ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=19]
 [ext_resource path="res://scenes/sean_ult.tscn" type="PackedScene" id=20]
@@ -24,24 +24,32 @@
 [ext_resource path="res://assets/players/sean/eyes.png" type="Texture" id=22]
 [ext_resource path="res://assets/players/sean/glow.png" type="Texture" id=23]
 [ext_resource path="res://animations/die.tres" type="Animation" id=24]
+[ext_resource path="res://assets/Fire Particle.png" type="Texture" id=25]
+[ext_resource path="res://assets/players/sean/beam.png" type="Texture" id=26]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 25, 6 )
 
-[sub_resource type="RectangleShape2D" id=2]
+[sub_resource type="CanvasItemMaterial" id=2]
+blend_mode = 1
+
+[sub_resource type="Curve" id=3]
+min_value = 0.2
+_data = [ Vector2( 0, 1 ), 0.0, 0.0, 0, 0, Vector2( 0.344828, 0.471402 ), -0.669031, -0.669031, 0, 0, Vector2( 0.396552, 0.274475 ), 0.0, 0.0, 0, 0 ]
+
+[sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 865.497, 10 )
 
-[sub_resource type="RectangleShape2D" id=3]
+[sub_resource type="RectangleShape2D" id=5]
 extents = Vector2( 20, 42 )
 
-[sub_resource type="DynamicFont" id=4]
+[sub_resource type="DynamicFont" id=6]
 size = 18
 use_mipmaps = true
 use_filter = true
 font_data = ExtResource( 19 )
 
-[sub_resource type="Animation" id=5]
-resource_name = "ult"
+[sub_resource type="Animation" id=7]
 length = 6.0
 tracks/0/type = "value"
 tracks/0/path = NodePath("KinematicBody2D/Sprite:position")
@@ -260,7 +268,7 @@ scale = Vector2( 2.22222, 2.22222 )
 monitoring = false
 
 [node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/handR/weapon"]
-position = Vector2( 28.0385, -4.30826 )
+position = Vector2( 30.8152, -24.935 )
 rotation = 0.436877
 texture = ExtResource( 17 )
 offset = Vector2( 6.90869, -6.25837 )
@@ -269,6 +277,28 @@ offset = Vector2( 6.90869, -6.25837 )
 position = Vector2( 33.9318, -14.76 )
 rotation = -1.13229
 shape = SubResource( 1 )
+
+[node name="CPUParticles2D" type="CPUParticles2D" parent="KinematicBody2D/Sprite/handR/weapon"]
+visible = false
+material = SubResource( 2 )
+position = Vector2( 48.5835, -40.8568 )
+rotation = 0.587082
+z_index = -1
+amount = 32
+lifetime = 0.2
+local_coords = false
+texture = ExtResource( 25 )
+emission_shape = 2
+emission_rect_extents = Vector2( 10, 25 )
+direction = Vector2( 180, 0 )
+spread = 180.0
+gravity = Vector2( 0, -490 )
+initial_velocity = 25.0
+angle = 180.0
+angle_random = 1.0
+scale_amount_random = 0.4
+scale_amount_curve = SubResource( 3 )
+hue_variation = 0.1
 
 [node name="legL" type="Sprite" parent="KinematicBody2D/Sprite"]
 self_modulate = Color( 0.486275, 0.360784, 0.188235, 1 )
@@ -291,21 +321,56 @@ scale = Vector2( 0.75, 0.75 )
 z_index = 1
 texture = ExtResource( 13 )
 
-[node name="beam" type="Area2D" parent="KinematicBody2D/Sprite/gun"]
+[node name="beam1" type="Area2D" parent="KinematicBody2D/Sprite/gun"]
+visible = false
 show_behind_parent = true
 monitoring = false
 
-[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/gun/beam"]
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/gun/beam1"]
 self_modulate = Color( 0.45098, 0.937255, 0.858824, 0.411765 )
 show_behind_parent = true
 position = Vector2( 20.6801, -5.21086 )
-scale = Vector2( 1714.36, 17.617 )
+scale = Vector2( 1700, 18 )
 texture = ExtResource( 8 )
 offset = Vector2( 0.505479, 0.0292177 )
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/gun/beam"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D/Sprite/gun/beam1"]
 position = Vector2( 878.29, -5.18855 )
-shape = SubResource( 2 )
+shape = SubResource( 4 )
+
+[node name="beam2" type="Area2D" parent="KinematicBody2D/Sprite/gun"]
+visible = false
+show_behind_parent = true
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/gun/beam2"]
+self_modulate = Color( 0.45098, 0.937255, 0.858824, 0.411765 )
+show_behind_parent = true
+position = Vector2( 437.254, -4.08714 )
+rotation = -1.5708
+scale = Vector2( 2.73441, 12.7539 )
+texture = ExtResource( 26 )
+offset = Vector2( 0.505479, 0.0292177 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D/Sprite/gun/beam2"]
+polygon = PoolVector2Array( 33.751, -19.2481, 843.852, -91.9029, 843.852, 82.4686, 33.751, 6.18109 )
+
+[node name="beam3" type="Area2D" parent="KinematicBody2D/Sprite/gun"]
+visible = false
+show_behind_parent = true
+monitoring = false
+
+[node name="Sprite" type="Sprite" parent="KinematicBody2D/Sprite/gun/beam3"]
+self_modulate = Color( 0.45098, 0.937255, 0.858824, 0.411765 )
+show_behind_parent = true
+position = Vector2( 23.3385, -5.57383 )
+rotation = -1.5708
+scale = Vector2( 4.57598, 4.03674 )
+texture = ExtResource( 26 )
+offset = Vector2( -0.365799, 33.7706 )
+
+[node name="CollisionPolygon2D" type="CollisionPolygon2D" parent="KinematicBody2D/Sprite/gun/beam3"]
+polygon = PoolVector2Array( 30.0145, -15.4549, 287.708, -151.645, 289.043, 144.274, 26.0089, 6.74879 )
 
 [node name="dot" type="Sprite" parent="KinematicBody2D/Sprite/gun"]
 visible = false
@@ -321,14 +386,14 @@ offset = Vector2( 15.0251, 0.302291 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KinematicBody2D"]
 position = Vector2( 1.2605, -6.96839 )
-shape = SubResource( 3 )
+shape = SubResource( 5 )
 
 [node name="Label" type="Label" parent="KinematicBody2D"]
 margin_left = -101.153
 margin_top = -72.4151
 margin_right = 98.8469
 margin_bottom = -49.4151
-custom_fonts/font = SubResource( 4 )
+custom_fonts/font = SubResource( 6 )
 align = 1
 __meta__ = {
 "_edit_use_anchors_": false
@@ -345,7 +410,7 @@ anims/attack = ExtResource( 2 )
 anims/die = ExtResource( 24 )
 anims/gun = ExtResource( 16 )
 anims/stab = ExtResource( 1 )
-anims/ult = SubResource( 5 )
+anims/ult = SubResource( 7 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
 wait_time = 3.0
@@ -360,8 +425,12 @@ one_shot = true
 wait_time = 1.5
 one_shot = true
 [connection signal="body_entered" from="KinematicBody2D/Sprite/handR/weapon" to="KinematicBody2D" method="_on_weapon_body_entered"]
-[connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam" to="." method="_on_beam_body_entered"]
-[connection signal="body_exited" from="KinematicBody2D/Sprite/gun/beam" to="." method="_on_beam_body_exited"]
+[connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam1" to="." method="_on_beam1_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Sprite/gun/beam1" to="." method="_on_beam1_body_exited"]
+[connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam2" to="." method="_on_beam2_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Sprite/gun/beam2" to="." method="_on_beam2_body_exited"]
+[connection signal="body_entered" from="KinematicBody2D/Sprite/gun/beam3" to="." method="_on_beam3_body_entered"]
+[connection signal="body_exited" from="KinematicBody2D/Sprite/gun/beam3" to="." method="_on_beam3_body_exited"]
 [connection signal="timeout" from="ReloadTimer" to="." method="_on_ReloadTimer_timeout"]
 [connection signal="timeout" from="BoomTimer" to="." method="_on_BoomTimer_timeout"]
 [connection signal="timeout" from="UltTimer" to="." method="_on_UltTimer_timeout"]

@@ -129,17 +129,10 @@ func _input(event):
 #PRESS C
 	elif event.is_action_pressed("c"):
 		ev = ("c")
+#PRESS V
 	elif event.is_action_pressed("v"):
 		ev = ("v")
-	#ULT
-#			if sp == 100:
-#				sp = 0
-#				$Sprite/head/eyes.show()
-#				get_parent()._ult()
-#	#SP MINI
-#			elif sp < 100 and sp >= 33 and gun_mode == req:
-#				sp -= 33
-#				get_parent()._sp_mini()
+
 	if is_network_master():
 		rpc("_input_effect", ev)
 
@@ -177,10 +170,16 @@ remotesync func _input_effect(event):
 		gun_mode = true
 		$Sprite/gun.show()
 	if event == ("c"):
-		get_parent()._ult()#TEST
-		$Sprite/head/eyes.show()#TEST
+#SP MINI
+		if sp >= 33 and gun_mode == req:
+			sp -= 33
+			get_parent()._sp_mini()
 	if event == ("v"):
-		get_parent()._sp_mini()#TEST
+#ULT
+		#if sp == 100:
+			#sp = 0
+			#$Sprite/head/eyes.show()
+		get_parent()._ult()
 
 func _damage(num):
 	if not get_parent().ult == true and get_parent().get_node("DeathTimer").is_stopped():
@@ -245,6 +244,7 @@ func _on_DeathTimer_timeout():
 	$Sprite/handR/weapon.show()
 	SPEED = 400
 	set_process_input(true)
+	get_parent().set_process_input(true)
 	set_collision_layer_bit(1, true)
 	set_collision_layer_bit(2, false)
 	set_collision_mask_bit(1, true)

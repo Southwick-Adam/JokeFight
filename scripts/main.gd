@@ -12,7 +12,25 @@ var players_left = Network.players.size()
 var spawn_pos = 5
 
 func _ready():
-	pass
+	if (get_tree().is_network_server()):
+		var rng = randf()
+		var num
+		if rng <= 0.5:
+			num = 1
+		else:
+			num = 2
+		rpc("_background", num)
+
+remotesync func _background(num):
+	if num == 1:
+		$background.texture = preload("res://assets/backgrounds/background1.png")
+		$background.global_position = Vector2(590, 362)
+		$background.scale = Vector2(1.012,1)
+	elif num == 2:
+		$background.texture = preload("res://assets/backgrounds/background2.PNG")
+		$background.global_position = Vector2(590, 355)
+		$background.scale = Vector2(1.527,2.15)
+		
 
 func _spawn(choice):
 	var node

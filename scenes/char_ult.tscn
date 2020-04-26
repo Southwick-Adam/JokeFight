@@ -1,9 +1,10 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=10 format=2]
 
 [ext_resource path="res://assets/players/charlotte/tower.png" type="Texture" id=1]
 [ext_resource path="res://assets/GlacialIndifference-Italic.otf" type="DynamicFontData" id=2]
 [ext_resource path="res://animations/char_ult.tres" type="Animation" id=3]
 [ext_resource path="res://scripts/char_ult.gd" type="Script" id=4]
+[ext_resource path="res://assets/circle.png" type="Texture" id=5]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 71.925, 9.6958 )
@@ -43,17 +44,41 @@ polygon = PoolVector2Array( 211.047, 340.255, 103.607, 148.398, 61.3982, 17.9352
 position = Vector2( 2815.4, -311.03 )
 shape = SubResource( 1 )
 
+[node name="Sprite" type="Sprite" parent="Area2D/CollisionShape2D"]
+modulate = Color( 0.207843, 0.207843, 0.207843, 1 )
+position = Vector2( 1.68046, 2.24081 )
+scale = Vector2( 37.273, 7.44233 )
+texture = ExtResource( 5 )
+
 [node name="CollisionShape2D2" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2816.54, -364.893 )
 shape = SubResource( 2 )
+
+[node name="Sprite" type="Sprite" parent="Area2D/CollisionShape2D2"]
+modulate = Color( 0.207843, 0.207843, 0.207843, 1 )
+position = Vector2( 1.10059, 0.0836182 )
+scale = Vector2( 61.2217, 7.44233 )
+texture = ExtResource( 5 )
 
 [node name="CollisionShape2D3" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2816.54, -397.553 )
 shape = SubResource( 2 )
 
+[node name="Sprite" type="Sprite" parent="Area2D/CollisionShape2D3"]
+modulate = Color( 0.207843, 0.207843, 0.207843, 1 )
+position = Vector2( -2.26074, -0.868469 )
+scale = Vector2( 61.2217, 7.44233 )
+texture = ExtResource( 5 )
+
 [node name="CollisionShape2D4" type="CollisionShape2D" parent="Area2D"]
 position = Vector2( 2809.72, -452.006 )
 shape = SubResource( 3 )
+
+[node name="Sprite" type="Sprite" parent="Area2D/CollisionShape2D4"]
+modulate = Color( 0.207843, 0.207843, 0.207843, 1 )
+position = Vector2( 1.19785, 0.365343 )
+scale = Vector2( 40.2141, 7.02219 )
+texture = ExtResource( 5 )
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "go"

@@ -20,7 +20,7 @@ func _on_Area2D_body_entered(body):
 			if sp:
 				for child in body.get_children():
 					if child.name == ("burn"):
-						return
+						break
 				var node = Burn.instance()
 				body.add_child(node)
 				node.global_position = body.global_position

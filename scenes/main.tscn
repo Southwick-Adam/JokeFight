@@ -78,10 +78,10 @@ position = Vector2( -3.01468, 33.1614 )
 position = Vector2( 995, 0 )
 
 [node name="bar3" type="Position2D" parent="."]
-position = Vector2( 0, 580 )
+position = Vector2( 0, 600 )
 
 [node name="bar4" type="Position2D" parent="."]
-position = Vector2( 995, 580 )
+position = Vector2( 995, 600 )
 
 [node name="spawn1" type="Position2D" parent="."]
 position = Vector2( 253.426, 217.805 )
@@ -140,4 +140,10 @@ text = "RETURN TO LOBBY"
 __meta__ = {
 "_edit_use_anchors_": false
 }
+
+[node name="background" type="Sprite" parent="."]
+modulate = Color( 0.564706, 0.564706, 0.564706, 1 )
+position = Vector2( 590.199, 355.542 )
+scale = Vector2( 1.52674, 2.15028 )
+z_index = -50
 [connection signal="pressed" from="win/Button" to="." method="_on_Button_pressed"]

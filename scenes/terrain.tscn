@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://assets/pixel.png" type="Texture" id=1]
+[ext_resource path="res://assets/block.png" type="Texture" id=2]
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 635.6, 61.2293 )
@@ -19,12 +19,6 @@ position = Vector2( 511.557, 489.973 )
 collision_layer = 3
 collision_mask = 3
 
-[node name="Sprite" type="Sprite" parent="StaticBody2D"]
-self_modulate = Color( 0.564706, 0.392157, 0.392157, 1 )
-position = Vector2( 82.2171, 158.345 )
-scale = Vector2( 1212.35, 186.577 )
-texture = ExtResource( 1 )
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2( 76.3444, 133.985 )
 shape = SubResource( 1 )
@@ -41,14 +35,28 @@ shape = SubResource( 2 )
 position = Vector2( 715.541, -277.384 )
 shape = SubResource( 2 )
 
+[node name="NinePatchRect" type="NinePatchRect" parent="StaticBody2D"]
+self_modulate = Color( 0.25098, 0.254902, 0.372549, 0.941176 )
+margin_left = -602.0
+margin_top = 71.0
+margin_right = 750.0
+margin_bottom = 317.0
+texture = ExtResource( 2 )
+patch_margin_top = 2
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
 [node name="StaticBody2D2" type="StaticBody2D" parent="."]
 position = Vector2( 258.878, 320.675 )
 collision_layer = 3
 collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D2"]
-scale = Vector2( 143.459, 33.377 )
-texture = ExtResource( 1 )
+modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
+position = Vector2( 0.598755, -1.19748 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D2"]
 shape = SubResource( 3 )
@@ -59,8 +67,10 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D3"]
-scale = Vector2( 143.459, 33.377 )
-texture = ExtResource( 1 )
+modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
+position = Vector2( -1.29236, 2.58469 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D3"]
 shape = SubResource( 3 )
@@ -71,8 +81,10 @@ collision_layer = 3
 collision_mask = 3
 
 [node name="Sprite" type="Sprite" parent="StaticBody2D4"]
-scale = Vector2( 143.459, 33.377 )
-texture = ExtResource( 1 )
+modulate = Color( 0.607843, 0.607843, 0.607843, 1 )
+position = Vector2( 0, -1.29236 )
+scale = Vector2( 3, 3 )
+texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D4"]
 shape = SubResource( 3 )

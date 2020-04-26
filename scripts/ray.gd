@@ -35,7 +35,7 @@ remotesync func _input_effect(event):
 				$KinematicBody2D.SPEED = 0
 				can_shoot = false
 				smash_out = true
-	if event == ("c"):
+	if event == ("v"):
 		$KinematicBody2D._animate2("ult")
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -51,7 +51,7 @@ func _process(delta):
 			_animate2("boxing_idle")
 		else:
 			_animate2("boxing")
-	if smash_out:
+	if smash_out and $KinematicBody2D.health > 0:
 		_animate2("gun")
 	else:
 		$KinematicBody2D/Sprite/gun.rotation_degrees = 18
@@ -71,7 +71,9 @@ func _process(delta):
 #RUSH
 	if rush:
 		position.x += 600 * delta * $KinematicBody2D/Sprite.scale.x
-
+#DEATH
+	if $KinematicBody2D.health <= 0:
+		_die()
 func _animate2(anim):
 	if $AnimationPlayer2.current_animation != (anim):
 		$AnimationPlayer2.play(anim)
@@ -139,3 +141,7 @@ func _on_UltTimer_timeout():
 
 func _on_DeathTimer_timeout():
 	_on_ReloadTimer_timeout()
+
+func _die():
+	smash_out = false
+	

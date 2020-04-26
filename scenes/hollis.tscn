@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=2]
+[gd_scene load_steps=32 format=2]
 
 [ext_resource path="res://animations/jump.tres" type="Animation" id=1]
 [ext_resource path="res://animations/idle.tres" type="Animation" id=2]
@@ -21,6 +21,8 @@
 [ext_resource path="res://animations/die.tres" type="Animation" id=19]
 [ext_resource path="res://assets/players/hollis/music.png" type="Texture" id=20]
 [ext_resource path="res://assets/players/hollis/note.png" type="Texture" id=21]
+[ext_resource path="res://scenes/hollis_ult.tscn" type="PackedScene" id=22]
+[ext_resource path="res://animations/sean_ult.tres" type="Animation" id=23]
 
 [sub_resource type="CircleShape2D" id=1]
 radius = 146.956
@@ -235,131 +237,9 @@ tracks/2/keys = {
 "values": [ false, true, false ]
 }
 
-[sub_resource type="Animation" id=9]
-length = 7.0
-tracks/0/type = "value"
-tracks/0/path = NodePath("KinematicBody2D/Sprite/handL:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ Vector2( 19.1318, 20.1381 ) ]
-}
-tracks/1/type = "value"
-tracks/1/path = NodePath("KinematicBody2D/Sprite/handL:rotation_degrees")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/keys = {
-"times": PoolRealArray( 0 ),
-"transitions": PoolRealArray( 1 ),
-"update": 0,
-"values": [ 0.0 ]
-}
-tracks/2/type = "value"
-tracks/2/path = NodePath("KinematicBody2D/Sprite/handR:position")
-tracks/2/interp = 1
-tracks/2/loop_wrap = true
-tracks/2/imported = false
-tracks/2/enabled = true
-tracks/2/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 1, 1.1, 1.3, 1.5, 1.8, 2.3, 2.5, 2.6, 2.9, 3.2, 3.5, 6.2, 6.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 34.3212, 9.60505 ), Vector2( 41.7407, 9.60505 ), Vector2( 31.9123, 9.60505 ), Vector2( 35.7522, 9.60505 ), Vector2( 41.0314, 10.135 ), Vector2( 33.9474, 10.6496 ), Vector2( 34.3212, 9.60505 ), Vector2( 41.7407, 9.60505 ), Vector2( 31.9123, 9.60505 ), Vector2( 35.7522, 9.60505 ), Vector2( 41.0314, 10.135 ), Vector2( 33.9474, 10.6496 ), Vector2( 34.3212, 9.60505 ), Vector2( 41.7407, 9.60505 ), Vector2( 41.7407, 9.60505 ), Vector2( 38.6787, 11.7249 ) ]
-}
-tracks/3/type = "value"
-tracks/3/path = NodePath("KinematicBody2D/Sprite/handR:rotation_degrees")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 1, 1.1, 1.3, 6.3 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 ]
-}
-tracks/4/type = "value"
-tracks/4/path = NodePath("KinematicBody2D/Sprite:position")
-tracks/4/interp = 1
-tracks/4/loop_wrap = true
-tracks/4/imported = false
-tracks/4/enabled = true
-tracks/4/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 6.5, 7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 0, 0 ), Vector2( 0, 0 ), Vector2( 0, -10 ), Vector2( 0, -10 ), Vector2( 0, 0 ) ]
-}
-tracks/5/type = "value"
-tracks/5/path = NodePath("KinematicBody2D/Sprite:rotation_degrees")
-tracks/5/interp = 1
-tracks/5/loop_wrap = true
-tracks/5/imported = false
-tracks/5/enabled = true
-tracks/5/keys = {
-"times": PoolRealArray( 0, 0.3, 0.6, 6.5 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 0.0, 0.0, 0.0, 0.0 ]
-}
-tracks/6/type = "value"
-tracks/6/path = NodePath("KinematicBody2D/Sprite/legL:position")
-tracks/6/interp = 1
-tracks/6/loop_wrap = true
-tracks/6/imported = false
-tracks/6/enabled = true
-tracks/6/keys = {
-"times": PoolRealArray( 0, 0.3, 6.5, 7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( -8.19322, 23.9495 ), Vector2( -7.1333, 23.9495 ), Vector2( -7.1333, 23.9495 ), Vector2( -8.19322, 23.9495 ) ]
-}
-tracks/7/type = "value"
-tracks/7/path = NodePath("KinematicBody2D/Sprite/legL:rotation_degrees")
-tracks/7/interp = 1
-tracks/7/loop_wrap = true
-tracks/7/imported = false
-tracks/7/enabled = true
-tracks/7/keys = {
-"times": PoolRealArray( 0, 0.3, 6.5, 7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ 4.15006, 0.0, 0.0, 4.15006 ]
-}
-tracks/8/type = "value"
-tracks/8/path = NodePath("KinematicBody2D/Sprite/legR:position")
-tracks/8/interp = 1
-tracks/8/loop_wrap = true
-tracks/8/imported = false
-tracks/8/enabled = true
-tracks/8/keys = {
-"times": PoolRealArray( 0, 0.3, 6.5, 7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ Vector2( 7.0291, 24.3478 ), Vector2( 6.49913, 24.3478 ), Vector2( 6.49913, 24.3478 ), Vector2( 7.0291, 24.3478 ) ]
-}
-tracks/9/type = "value"
-tracks/9/path = NodePath("KinematicBody2D/Sprite/legR:rotation_degrees")
-tracks/9/interp = 1
-tracks/9/loop_wrap = true
-tracks/9/imported = false
-tracks/9/enabled = true
-tracks/9/keys = {
-"times": PoolRealArray( 0, 0.3, 6.5, 7 ),
-"transitions": PoolRealArray( 1, 1, 1, 1 ),
-"update": 0,
-"values": [ -6.51589, 0.0, 0.0, -6.51589 ]
-}
-
 [node name="hollis" type="Node2D"]
 script = ExtResource( 13 )
+Ult = ExtResource( 22 )
 
 [node name="KinematicBody2D" type="KinematicBody2D" parent="." groups=[
 "player",
@@ -517,10 +397,10 @@ anims/die = ExtResource( 19 )
 anims/fire = SubResource( 6 )
 anims/gun = SubResource( 7 )
 anims/stab = SubResource( 8 )
-anims/ult = SubResource( 9 )
+anims/ult = ExtResource( 23 )
 
 [node name="ReloadTimer" type="Timer" parent="."]
-wait_time = 3.0
+wait_time = 2.0
 one_shot = true
 
 [node name="UltTimer" type="Timer" parent="."]

@@ -8,8 +8,10 @@ var can_shoot = true
 var boomstate = 1
 var ult = false
 onready var sp = $KinematicBody2D.sp
+onready var beam = $KinematicBody2D/Sprite/gun/beam1
 var ult_shots = 3
 var can_ult_shoot = false
+var lense = 1
 
 
 # Called when the node enters the scene tree for the first time.
@@ -26,26 +28,46 @@ func _input(event):
 		if event.is_action_released("x"):
 			ev = ("release")
 	#ULT SHOOTING
-		if event.is_action_pressed("c") and can_ult_shoot and ult_shots > 0:
-			ev = ("c")
+		if event.is_action_pressed("v") and can_ult_shoot and ult_shots > 0:
+			ev = ("v")
+	#LENSE
+		if event.is_action_pressed("s"):
+			ev = ("s")
+
 		if ev != null:
 			rpc("_input_effect", ev)
 
 remotesync func _input_effect(event):
 	if event == ("fire"):
-		$KinematicBody2D/Sprite/gun/beam.show()
-		$KinematicBody2D/Sprite/gun/beam.monitoring = true
+		beam.show()
+		beam.monitoring = true
 		$ReloadTimer.paused = false
 	elif event == ("release"):
-		$KinematicBody2D/Sprite/gun/beam.hide()
-		$KinematicBody2D/Sprite/gun/beam.monitoring = false
+		beam.hide()
+		beam.monitoring = false
 		$ReloadTimer.paused = true
 #ULT SHOOTING
-	if event == ("c"):
+	if event == ("v"):
 		var node = Marks.instance()
 		get_node("/root/main/sean_ult").add_child(node)
 		node.global_position = Vector2(get_node("/root/main/sean_ult/bar").global_position.x, 690)
 		ult_shots -= 1
+#LENSES
+	if event == ("s"):
+		if lense == 1:
+			$KinematicBody2D/Sprite/gun/beam1.monitoring = false
+			$KinematicBody2D/Sprite/gun/beam1.hide()
+			beam = $KinematicBody2D/Sprite/gun/beam2
+		elif lense == 2:
+			$KinematicBody2D/Sprite/gun/beam2.monitoring = false
+			$KinematicBody2D/Sprite/gun/beam2.hide()
+			beam = $KinematicBody2D/Sprite/gun/beam3
+		elif lense == 3:
+			$KinematicBody2D/Sprite/gun/beam3.monitoring = false
+			$KinematicBody2D/Sprite/gun/beam3.hide()
+			beam = $KinematicBody2D/Sprite/gun/beam1
+			lense = 0
+		lense += 1
 
 func _process(delta):
 	if can_shoot == false:
@@ -63,21 +85,34 @@ func _process(delta):
 		$AnimationPlayer2.play("gun")
 
 func _harm(body):
-	body._damage(5 + boomstate)
+	body._damage(7 * boomstate)
 	$KinematicBody2D.sp += 4
 
-func _on_beam_body_entered(body):
+func _on_beam_enter(body):
 	if body.is_in_group("player"):
 		beam_target.append(body)
 
-func _on_beam_body_exited(body):
+func _on_beam_exit(body):
 	if beam_target.has(body):
 		beam_target.erase(body)
 
+func _on_beam1_body_entered(body):
+	_on_beam_enter(body)
+func _on_beam1_body_exited(body):
+	_on_beam_exit(body)
+func _on_beam2_body_entered(body):
+	_on_beam_enter(body)
+func _on_beam2_body_exited(body):
+	_on_beam_exit(body)
+func _on_beam3_body_entered(body):
+	_on_beam_enter(body)
+func _on_beam3_body_exited(body):
+	_on_beam_exit(body)
+
 func _on_ReloadTimer_timeout():
 	if can_shoot:
-		$KinematicBody2D/Sprite/gun/beam.hide()
-		$KinematicBody2D/Sprite/gun/beam.monitoring = false
+		beam.hide()
+		beam.monitoring = false
 		$KinematicBody2D/Sprite/gun/dot.show()
 		can_shoot = false
 		$ReloadTimer.wait_time = 2
@@ -91,14 +126,17 @@ func _on_ReloadTimer_timeout():
 func _boom_state(state):
 	var sprite = $KinematicBody2D/Sprite/handR/weapon/Sprite
 	if state == 1:
+		$KinematicBody2D/Sprite/handR/weapon/CPUParticles2D.hide()
 		sprite.texture = preload("res://assets/players/sean/boom.png")
 		sprite.position = Vector2(26,-7)
 		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(1,1)
 	elif state == 2:
+		$KinematicBody2D/Sprite/handR/weapon/CPUParticles2D.hide()
 		sprite.texture = preload("res://assets/players/sean/boom2.png")
 		sprite.position = Vector2(33,-18)
 		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(1.52,1.39)
 	elif state == 3:
+		$KinematicBody2D/Sprite/handR/weapon/CPUParticles2D.show()
 		sprite.texture = preload("res://assets/players/sean/boom3.png")
 		sprite.position = Vector2(32,-28)
 		$KinematicBody2D/Sprite/handR/weapon/CollisionShape2D.scale = Vector2(2.32,1.5)

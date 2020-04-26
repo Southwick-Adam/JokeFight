@@ -40,8 +40,8 @@ func _process(delta):
 	if can_shoot == false:
 		$ReloadTimer.paused = false
 	else:
-		$KinematicBody2D/Sprite/head/gun/mouth.scale.y = 0.4 + ($ReloadTimer.time_left * .2)
-		$KinematicBody2D/Sprite/head/gun/mouth.scale.x = 0.7 + ($ReloadTimer.time_left * .1)
+		$KinematicBody2D/Sprite/head/gun/mouth.scale.y = 0.4 + ($ReloadTimer.time_left * .4)
+		$KinematicBody2D/Sprite/head/gun/mouth.scale.x = 0.7 + ($ReloadTimer.time_left * .15)
 #BEAM
 	if not sing_target.empty():
 		for targ in sing_target:
@@ -82,12 +82,12 @@ func _on_ReloadTimer_timeout():
 		$KinematicBody2D/Sprite/head/gun.hide()
 		$KinematicBody2D/Sprite/head/gun/beam.monitoring = false
 		can_shoot = false
-		$ReloadTimer.wait_time = 2
+		$ReloadTimer.wait_time = 1.5
 		$ReloadTimer.start()
 	else:
 		can_shoot = true
 		$KinematicBody2D/note.modulate.a = 1
-		$ReloadTimer.wait_time = 3
+		$ReloadTimer.wait_time = 2
 		$ReloadTimer.start()
 
 func _ult():
